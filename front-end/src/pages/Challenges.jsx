@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import useAxios from '../utils/useAxios';
 
 const Challenges = () => {
@@ -28,9 +29,10 @@ const Challenges = () => {
 
                 <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     {data.map((c) => (
-                        <a
+
+                        <Link
                             className="bg-gray-900 block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
-                            href={`/challenge/${c._id}`}
+                            to={`/challenge/${c._id}`}
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +58,7 @@ const Challenges = () => {
                             <p className="mt-1 text-sm text-gray-300">
                                 End Date: {c.endDate}
                             </p>
-                        </a>
+                        </Link>
                     ))}
 
                 </div>
