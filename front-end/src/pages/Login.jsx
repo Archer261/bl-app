@@ -53,9 +53,12 @@ const LoginPage = () => {
                 <h2 className="mt-6 text-center text-3xl font-extrabold text-white">Sign in to your account</h2>
                 <p className="mt-2 text-center text-sm text-gray-600">
                     Or{' '}
-                    <Link to="/signup" className="font-medium text-white hover:text-red-700">
+                    <a className="font-medium text-white hover:text-red-700">
                         sign up if you're not a member
-                    </Link>
+                    </a>
+                    {/* <Link to="/signup" className="font-medium text-white hover:text-red-700">
+                        sign up if you're not a member
+                    </Link> */}
                 </p>
             </div>
 
