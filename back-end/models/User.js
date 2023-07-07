@@ -35,6 +35,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
     notifications: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Notification',

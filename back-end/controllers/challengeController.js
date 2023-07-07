@@ -29,6 +29,9 @@ export const getAllChallengeById = async (req, res) => {
             .populate({
                 path: 'participants',
                 select: 'email firstName lastName username profileImage'
+            }).populate({
+                path: 'weighIns.user',
+                select: '-password'
             })
 
         if (!challenge) {

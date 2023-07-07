@@ -22,7 +22,7 @@ export const signup = async (req, res) => {
         const token = generateToken(newUser._id);
 
         // Return the token and user details
-        return res.json({ token, user: { username: newUser.username, email: newUser.email, id: newUser._id, firstName: newUser.firstName, lastName: newUser.lastName, profileImage: newUser.profileImage } })
+        return res.json({ token, user: { username: newUser.username, email: newUser.email, id: newUser._id, firstName: newUser.firstName, lastName: newUser.lastName, profileImage: newUser.profileImage, isAdmin: newUser.isAdmin, isTest: newUser.isTest } })
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
@@ -62,6 +62,8 @@ export const login = async (req, res) => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 profileImage: user.profileImage,
+                isAdmin: user.isAdmin,
+                isTest: user.isTest
             },
         });
     } catch (error) {

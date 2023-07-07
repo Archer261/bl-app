@@ -1,11 +1,12 @@
 import express from 'express';
 import { createChallenge, getAllChallenges, getAllChallengeById, updateChallenge, deleteChallenge } from '../controllers/challengeController.js'
 // import { } from '../middleware/authMiddleware';
+import { isAdmin } from '../middleware/checkAdmin.js'
 
 const router = express.Router();
 
 // Create a new challenge
-router.post('/', createChallenge);
+router.post('/', isAdmin, createChallenge);
 
 // Retrieve all challenges
 router.get('/', getAllChallenges);
