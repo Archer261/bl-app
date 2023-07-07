@@ -2,7 +2,7 @@
     "rewrites": [
       {
         "source": "/api/(.*)",
-        "destination": "https://bl-backend.onrender.com"
+        "destination": "https://bl-backend.onrender.com/api"
       }
     ]
   }
