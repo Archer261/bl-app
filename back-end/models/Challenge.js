@@ -12,7 +12,7 @@ const weighInSchema = new mongoose.Schema({
     },
     weighInDate: {
         type: Date,
-        required: true,
+        default: Date.now,
     },
 
     size: {
@@ -26,7 +26,7 @@ const challengeSchema = new mongoose.Schema({
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
     participants: [{
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
         buyInStatus: { type: Boolean, default: false }
     }],
     count: { type: Number, default: 0 },

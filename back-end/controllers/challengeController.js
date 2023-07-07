@@ -26,10 +26,10 @@ export const getAllChallenges = async (req, res) => {
 export const getAllChallengeById = async (req, res) => {
     try {
         const challenge = await Challenge.findById(req.params.id)
-        // .populate({
-        //     path: 'participants.user.username participants.user.email',
-        //     model: User
-        // })
+            .populate({
+                path: 'participants',
+                select: 'email firstName lastName username profileImage'
+            })
 
         if (!challenge) {
             return res.status(404).json({ error: 'Challenge not found' });
