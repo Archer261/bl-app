@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/(.*)",
+        "destination": "https://bl-backend.onrender.com"
+      }
+    ]
+  }
+  
