@@ -26,9 +26,14 @@ const LoginPage = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        const credentials = {
+            email,
+            password,
+        };
+
         // Send login request to backend server
         axios
-            .post('/api/login', { email, password })
+            .post('/api/login', credentials)
             .then((response) => {
                 login(response);
                 // Handle successful login
@@ -38,6 +43,8 @@ const LoginPage = () => {
                 // Handle login error
                 console.error(error);
             });
+
+        setPassword('');
     };
 
     return (
