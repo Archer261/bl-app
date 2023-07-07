@@ -4,7 +4,7 @@ import User from '../models/User.js'
 
 // Register a new user
 export const signup = async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, firstName, lastName, profileImage } = req.body;
 
     try {
         // Check if the username or email already exists
@@ -15,14 +15,14 @@ export const signup = async (req, res) => {
         }
 
         // Create a new user
-        const newUser = new User({ username, email, password });
+        const newUser = new User({ username, email, password, firstName, lastName, profileImage });
         await newUser.save();
 
         // Generate a JWT token
         const token = generateToken(newUser._id);
 
         // Return the token and user details
-        return res.json({ token, user: { username: newUser.username, email: newUser.email, id: newUser._id } })
+        return res.json({ token, user: { username: newUser.username, email: newUser.email, id: newUser._id, firstName: newUser.firstName, lastName: newUser.lastName, profileImage: newUser.profileImage } })
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
@@ -30,12 +30,13 @@ export const signup = async (req, res) => {
 };
 
 // Login user
+// Login user
 export const login = async (req, res) => {
-    const { email, password } = req.body;
+    const { usernameOrEmail, password } = req.body;
 
     try {
-        // Find the user by email or email
-        const user = await User.findOne().or([{ email }, { email: email }]);
+        // Find the user by username or email
+        const user = await User.findOne().or([{ username: usernameOrEmail }, { email: usernameOrEmail }]);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
@@ -52,7 +53,17 @@ export const login = async (req, res) => {
         const token = generateToken(user._id);
 
         // Return the token and user details
-        return res.json({ token, user: { username: user.username, email: user.email, id: user._id, firstName: user.firstName, lastName: user.lastName, profileImage: user.profileImage } });
+        return res.json({
+            token,
+            user: {
+                username: user.username,
+                email: user.email,
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                profileImage: user.profileImage,
+            },
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
