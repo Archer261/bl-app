@@ -13,7 +13,7 @@ const AuthProvider = ({ children, initialToken }) => {
     const login = (response) => {
         console.log(response)
         const { token, user } = response.data; // Assuming the token and user are present in the response data
-
+        console.log(user);
         if (token && user) {
             // Store the token and user data in localStorage
             localStorage.setItem('token', token);
