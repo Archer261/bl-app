@@ -66,6 +66,7 @@ export default function Sidebar({ participants }) {
                                             </div>
                                         </div>
                                         <div className="flex-1 px-4 py-2 overflow-y-auto">
+                                            <h2 className='font-bold text-xl'>Participants</h2>
                                             <div className="overflow-x-auto">
                                                 <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                                                     <thead className="ltr:text-left rtl:text-right">
@@ -82,7 +83,7 @@ export default function Sidebar({ participants }) {
                                                     </thead>
 
                                                     <tbody className="divide-y divide-gray-200">
-                                                        {participants.map((p) => (
+                                                        {participants ? participants.map((p) => (
 
 
                                                             <tr>
@@ -109,7 +110,7 @@ export default function Sidebar({ participants }) {
                                                                 </td>
                                                             </tr>
 
-                                                        ))}
+                                                        )) : (<></>)}
                                                     </tbody>
                                                 </table>
                                             </div>

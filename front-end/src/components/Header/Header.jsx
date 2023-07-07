@@ -145,16 +145,18 @@ const Header = () => {
                                                     </a>
                                                 </Link>
                                             </li>
-                                            <li>
-                                                <Link to="/create-user">
-                                                    <a
-                                                        className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
-                                                        onClick={handleClickOption}
-                                                    >
-                                                        Create Usertest
-                                                    </a>
-                                                </Link>
-                                            </li>
+                                            {user.isAdmin && (
+                                                <li>
+                                                    <Link to="/create-user">
+                                                        <a
+                                                            className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                                                            onClick={handleClickOption}
+                                                        >
+                                                            Create User
+                                                        </a>
+                                                    </Link>
+                                                </li>
+                                            )}
                                             <li>
                                                 <Link to="/">
                                                     <a
@@ -166,15 +168,17 @@ const Header = () => {
                                                 </Link>
                                             </li>
                                             {!isMobile && (
-                                                <li>
-                                                    <a
-                                                        href="#"
-                                                        className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
-                                                        onClick={handleLogout}
-                                                    >
-                                                        Logout
-                                                    </a>
-                                                </li>
+                                                <Link to="/">
+                                                    <li>
+                                                        <a
+                                                            href="#"
+                                                            className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
+                                                            onClick={handleLogout}
+                                                        >
+                                                            Logout
+                                                        </a>
+                                                    </li>
+                                                </Link>
                                             )}
                                         </>
                                     )}

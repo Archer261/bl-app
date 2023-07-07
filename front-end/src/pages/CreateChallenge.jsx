@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../utils/AuthContext';
 import axios from 'axios';
 
 const CreateChallenge = () => {
@@ -14,9 +15,11 @@ const CreateChallenge = () => {
     const [buyIn, setBuyIn] = useState('');
     const [withSize, setWithSize] = useState(false);
 
+    const { token, user, isAuthenticated } = useContext(AuthContext);
+
     const handleToggle = () => {
         setWithSize(!withSize);
-        console.log(withSize)
+
     };
 
     const navigate = useNavigate();
@@ -30,17 +33,14 @@ const CreateChallenge = () => {
             const response = await axios.get('/api/users'); // Replace with your API endpoint to fetch users
             setUsers(response.data);
             setIsLoading(false);
-            console.log(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
         }
     };
 
     const handleUserSelection = (event) => {
-        console.log(event)
         const selectedUserId = event.target.value;
         const selectedUser = users.find(user => user._id === selectedUserId);
-        console.log(selectedUser)
         setSelectedUser(selectedUser);
         addToSelected(selectedUser);
 
@@ -49,7 +49,7 @@ const CreateChallenge = () => {
     const addToSelected = (option) => {
         setSelectedOptions([...selectedOptions, option.name]);
         setParticipants([...participants, { _id: option._id, buyInStatus: false }])
-        console.log(participants)
+
     };
 
     const handleSubmit = (e) => {
@@ -57,11 +57,11 @@ const CreateChallenge = () => {
 
         // Send login request to backend server
         axios
-            .post('/api/challenge', { name: challengeName, startDate, endDate, buyIn, withSize, participants: participants })
+            .post('/api/challenge', { user: user, name: challengeName, startDate, endDate, buyIn, withSize, participants: participants })
             .then((response) => {
                 navigate(`/challenge/${response.data._id}`)
                 // Handle successful login
-                console.log(response.data);
+
             })
             .catch((error) => {
                 // Handle login error
@@ -71,15 +71,15 @@ const CreateChallenge = () => {
 
     const handleWithSize = (e) => {
         if (e.target.value === 'on') {
-            console.log(e.target.value)
+
             setWithSize(true);
 
         } else {
             setWithSize(false);
-            console.log(e.target.value)
+
         }
-        console.log(withSize)
-        console.log(e.target.value)
+
+
     }
     return (
         <section class="bg-white dark:bg-white rounded-lg">
@@ -87,6 +87,7 @@ const CreateChallenge = () => {
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:gray-900">Create New Challenge</h2>
                 <form onSubmit={handleSubmit}>
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+
                         <div class="flex items-center">
                             <label className="relative inline-flex items-center cursor-pointer">
                                 <input
@@ -102,6 +103,7 @@ const CreateChallenge = () => {
                                 </span>
                             </label>
                         </div>
+
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Challenge Name</label>
                             <input onChange={(e) => setChallengeName(e.target.value)} type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type challenge name" required="" />

@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router';
+import { AuthContext } from '../utils/AuthContext';
 import axios from 'axios';
 
 const CreateUser = () => {
@@ -10,6 +11,8 @@ const CreateUser = () => {
     const [firstName, setFirstName] = useState('');
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
+
+    const { token, user, isAuthenticated } = useContext(AuthContext);
 
     const handleToggle = () => {
         setIsAdmin(!isAdmin);
@@ -52,21 +55,23 @@ const CreateUser = () => {
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:gray-900">Create New User</h2>
                 <form onSubmit={handleSubmit}>
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                        <div class="flex items-center">
-                            <label className="relative inline-flex items-center cursor-pointer">
-                                <input
-                                    type="checkbox"
-                                    value=""
-                                    className="sr-only peer"
-                                    checked={!isAdmin}
-                                    onChange={handleToggle}
-                                />
-                                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                    Admin
-                                </span>
-                            </label>
-                        </div>
+                        {user.isAdmin &&
+                            <div class="flex items-center">
+                                <label className="relative inline-flex items-center cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        value=""
+                                        className="sr-only peer"
+                                        checked={!isAdmin}
+                                        onChange={handleToggle}
+                                    />
+                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                        Admin
+                                    </span>
+                                </label>
+                            </div>
+                        }
                         <div class="sm:col-span-2">
                             <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">First Name</label>
                             <input onChange={(e) => setFirstName(e.target.value)} type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bob" required="" />

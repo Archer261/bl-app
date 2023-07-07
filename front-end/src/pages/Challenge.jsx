@@ -13,23 +13,6 @@ const Challenge = () => {
     const [participants, setParticipants] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    //const [participantData, setParticipantData] = useState([]);
-
-    // const fetchParticipants = async (participantIds) => {
-    //     console.log(participantIds)
-    //     try {
-    //         const response = await axios.get(`/api/users`, {
-    //             params: {
-    //                 ids: participantIds.map((p) => p._id).join(","),
-    //             },
-    //         });
-    //         const participantsData = response.data;
-    //         setParticipantData(participantsData);
-    //         console.log(participantsData)
-    //     } catch (error) {
-    //         console.error('Error fetching participants:', error);
-    //     }
-    // };
 
     useEffect(() => {
         const fetchChallengeData = async () => {
@@ -56,8 +39,6 @@ const Challenge = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-
-
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
 

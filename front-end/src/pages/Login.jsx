@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { AuthContext, AuthProvider } from '../utils/AuthContext';
+import { ErrorPopup } from '../components';
+
 
 const LoginPage = () => {
 
@@ -22,6 +24,7 @@ const LoginPage = () => {
 
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [authError, setAuthError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -42,6 +45,7 @@ const LoginPage = () => {
             .catch((error) => {
                 // Handle login error
                 console.error(error);
+                setAuthError(error);
             });
 
         setPassword('');
@@ -133,6 +137,7 @@ const LoginPage = () => {
 
                 </div>
             </div>
+
         </div>
     );
 };

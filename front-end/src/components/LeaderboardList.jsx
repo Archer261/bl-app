@@ -10,6 +10,24 @@ const LeaderboardList = ({ participants }) => {
     //     { rank: 5, name: 'Alex', score: 60 },
     // ];
 
+    if (!participants) {
+        return (
+            <div className="max-w-lg mx-auto">
+                <ul className="divide-y divide-gray-200 flex items-center justify-center">
+                    <motion.li
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="py-3 flex items-center w-full px-3"
+                    >
+                        <span className="ml-3 font-medium">No Data</span>
+                    </motion.li>
+                </ul>
+            </div>
+
+        )
+    }
+
     return (
         <div className="max-w-lg mx-auto">
             <ul className="divide-y divide-gray-200">
@@ -17,7 +35,7 @@ const LeaderboardList = ({ participants }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="py-3 flex items-center w-full"
+                    className="py-3 flex items-center w-full px-3"
                 >
                     <span className="text-gray-500">Place</span>
                     <span className="ml-3 font-medium">Name</span>

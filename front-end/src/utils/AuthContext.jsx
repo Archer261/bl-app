@@ -1,19 +1,21 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { PopupContext } from './PopupContext'
+import { ErrorPopup } from '../components';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children, initialToken }) => {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [token, setToken] = useState(initialToken || '');
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+    const [error, setError] = useState(null);
 
     const login = (response) => {
-        console.log(response)
-        const { token, user } = response.data; // Assuming the token and user are present in the response data
-        console.log(user);
+        console.log(response);
+        const { token, user, error } = response.data;
+
         if (token && user) {
             // Store the token and user data in localStorage
             localStorage.setItem('token', token);
@@ -22,31 +24,26 @@ const AuthProvider = ({ children, initialToken }) => {
             // Update the state values in the AuthContext
             setToken(token);
             setUser(user);
-
-
         } else {
-
+            setError(error);
+            console.log(response.data)
         }
     };
 
     const signup = (response) => {
-
         console.log(response);
-        const { token, user } = response.data;
+        const { token, user, error } = response.data;
 
-
-        if (token && newUser) {
+        if (token && user) {
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
 
             setToken(token);
             setUser(user);
 
-
             navigate('/'); // Redirect to home page after successful signup
-
         } else {
-
+            setError(error);
         }
     };
 
@@ -74,7 +71,7 @@ const AuthProvider = ({ children, initialToken }) => {
                 }
             }
         }
-    }, [isAuthenticated, navigate]);
+    }, [isAuthenticated, navigate, location.pathname]);
 
     const authContextValue = {
         user,
@@ -84,8 +81,13 @@ const AuthProvider = ({ children, initialToken }) => {
         signup,
         isAuthenticated,
     };
+    console.log(error)
 
-    return <AuthContext.Provider value={authContextValue}>{children}</AuthContext.Provider>;
+    return (
+        <AuthContext.Provider value={authContextValue}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export { AuthContext, AuthProvider };
