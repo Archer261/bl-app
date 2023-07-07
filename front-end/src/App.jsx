@@ -1,6 +1,6 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import { Login, Profile, Home, Signup, CreateChallenge, Challenge, Challenges } from './pages';
+import { Login, Profile, Home, Signup, CreateChallenge, Challenge, Challenges, CreateUser } from './pages';
 import { Header, Footer, Info, Topics, DatePickerModal } from './components';
 import { Routes, Route } from 'react-router';
 import { AuthContext, AuthProvider } from './utils/AuthContext';
@@ -22,6 +22,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/challenge/:id" element={<Challenge />} />
           <Route path="/users/:id" element={<Profile />} />
+          <Route path="/create-user" element={<CreateUser />} />
           <Route path="/create-challenge" element={<CreateChallenge />} />
           <Route path="/challenge" element={<Challenges />} />
         </Routes>

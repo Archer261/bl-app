@@ -11,5 +11,6 @@ import Popup from './Popup';
 import LeaderboardList from './LeaderboardList';
 import Top3 from './Top3';
 import FmImage from './ImageComponent';
+import Sidebar from './Sidebar';
 
-export { Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage }
+export { Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage, Sidebar }

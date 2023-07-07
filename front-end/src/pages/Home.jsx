@@ -13,7 +13,6 @@ const Home = () => {
         const fetchChallengeData = async () => {
             try {
                 const response = await axios.get(`/api/challenge`);
-                console.log(response)
                 const featuredChallenge = response.data.find(
                     (challenge) => challenge.isFeatured === true
                 );
@@ -40,8 +39,6 @@ const Home = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
-
-    console.log(challengeData);
 
     return (
         <>

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { first, second, third } from '../assets';
 
-const Top3 = ({ title }) => {
+const Top3 = ({ title, participants }) => {
     const imageVariants = {
         hidden: { opacity: 0 },
         visible: { opacity: 1 }

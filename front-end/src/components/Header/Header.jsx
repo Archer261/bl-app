@@ -14,8 +14,6 @@ const Header = () => {
     };
 
     const unreadNotificationCount = 3; // Example count
-    console.log(user)
-
     return (
         <header className="bg-white">
             <div
@@ -59,14 +57,14 @@ const Header = () => {
                         <div className="sm:flex sm:gap-4">
                             {isAuthenticated && (
                                 <>
-                                    <a href="#" className="block shrink-0">
+                                    <Link to={`/users/${user.id}`} className="block shrink-0">
                                         <span className="sr-only">Profile</span>
                                         <img
                                             alt="Profile"
                                             src={user.profileImage}
                                             className="h-10 w-10 rounded-full object-cover"
                                         />
-                                    </a>
+                                    </Link>
                                     <a
                                         className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer"
                                         onClick={handleLogout} // Call handleLogout function on button click

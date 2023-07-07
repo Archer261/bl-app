@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router";
 import { AuthContext } from '../utils/AuthContext';
 import useAxios from "../utils/useAxios";
@@ -17,6 +17,8 @@ const Profile = () => {
         return <div>Error: {error.message}</div>;
     }
 
+
+    console.log(data)
     return (
         <div className="bg-gray-100 max-h-screen">
             <div className="max-w-3xl mx-auto px-4 py-8">
@@ -30,7 +32,7 @@ const Profile = () => {
                             />
                         </div>
                         <div className="w-1/2 px-6 py-8">
-                            <h2 className="text-3xl font-bold mb-4">test name</h2>
+                            <h2 className="text-3xl font-bold mb-4">{data.firstName} {data.lastName}</h2>
                             <p className="text-gray-600 text-lg mb-4">
                                 Email:
                             </p>

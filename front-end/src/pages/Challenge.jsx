@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { LeaderboardList, Top3 } from '../components'
+import { LeaderboardList, Top3, Sidebar } from '../components'
 import { useParams } from "react-router";
 import { AuthContext } from '../utils/AuthContext';
 import useAxios from "../utils/useAxios";
@@ -38,7 +38,7 @@ const Challenge = () => {
                 setChallengeData(response.data);
                 setParticipants(response.data.participants);
                 //fetchParticipants(response.data.participants)
-                console.log(response)
+
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -61,18 +61,20 @@ const Challenge = () => {
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
 
-    console.log(participants);
     return (
-        <div>
-            <CountdownTimer startDateTime={sd} endDateTime={ed} />
-            {JSON.parse(challengeData.withSize) ?
-                <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
-                    <div className="max-h-full rounded-lg"><Top3 title={"Top Weight Losers"} /><LeaderboardList /></div>
-                    <div className="max-h-full rounded-lg"><Top3 title={"Top Size Losers"} /><LeaderboardList /></div>
-                </div>
-                : <><Top3 title={"Top Weight Losers"} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
-            }
-        </div>
+        <>
+            <Sidebar participants={participants} />
+            <div>
+                <CountdownTimer startDateTime={sd} endDateTime={ed} />
+                {JSON.parse(challengeData.withSize) ?
+                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
+                        <div className="max-h-full rounded-lg"><Top3 title={"Top Weight Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
+                        <div className="max-h-full rounded-lg"><Top3 title={"Top Size Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
+                    </div>
+                    : <><Top3 title={"Top Weight Losers"} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
+                }
+            </div>
+        </>
     )
 }
 
