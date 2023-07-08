@@ -170,13 +170,13 @@ const Header = () => {
                                             {!isMobile && (
                                                 <Link to="/">
                                                     <li>
-                                                        <a
+                                                        <button
                                                             href="#"
                                                             className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800"
                                                             onClick={handleLogout}
                                                         >
                                                             Logout
-                                                        </a>
+                                                        </button>
                                                     </li>
                                                 </Link>
                                             )}

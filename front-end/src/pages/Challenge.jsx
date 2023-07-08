@@ -33,7 +33,7 @@ const Challenge = () => {
     }, [id]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <span className="loading loading-spinner text-error"></span>;
     }
 
     if (error) {
@@ -44,7 +44,7 @@ const Challenge = () => {
 
     return (
         <>
-            <Sidebar participants={participants} />
+            <Sidebar participants={participants} organizer={challengeData.organizer} />
             <div>
                 <CountdownTimer startDateTime={sd} endDateTime={ed} />
                 {JSON.parse(challengeData.withSize) ?

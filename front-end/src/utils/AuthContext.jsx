@@ -81,7 +81,6 @@ const AuthProvider = ({ children, initialToken }) => {
         signup,
         isAuthenticated,
     };
-    console.log(error)
 
     return (
         <AuthContext.Provider value={authContextValue}>

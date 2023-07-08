@@ -44,7 +44,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
         return (
             <div className="flex justify-center items-center">
                 <div className="text-center">
-                    <p className="text-lg">...Loading Timer</p>
+                    <span className="loading loading-dots loading-lg"></span>
                 </div>
             </div>
         )

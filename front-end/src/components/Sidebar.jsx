@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
-export default function Sidebar({ participants }) {
+export default function Sidebar({ participants, organizer }) {
     const [open, setOpen] = useState(false);
 
     return (
@@ -65,8 +65,54 @@ export default function Sidebar({ participants }) {
                                                 </button>
                                             </div>
                                         </div>
+                                        <div className="flex-2 px-4 py-2 overflow-y-auto">
+                                            <h2 className='font-bold text-xl'>Organizer(s):</h2>
+                                            <div className="overflow-x-auto">
+                                                <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+                                                    <thead className="ltr:text-left rtl:text-right">
+                                                        <tr>
+                                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                                                Name
+                                                            </th>
+                                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+
+                                                            </th>
+
+                                                            <th className="px-4 py-2"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody className="divide-y divide-gray-200">
+                                                        <tr>
+                                                            <td className="whitespace-nowrap px-4 py-2">
+                                                                <div
+                                                                    className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
+                                                                >
+                                                                    <img class="w-8 h-8 rounded-full" src={organizer.profileImage} alt='Organizer' />
+                                                                </div>
+                                                            </td>
+                                                            <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                                                                {organizer.firstName} {organizer.lastName}
+                                                            </td>
+                                                            <td className="whitespace-nowrap px-4 py-2 text-gray-700"></td>
+
+
+                                                            <td className="whitespace-nowrap px-4 py-2">
+                                                                <Link
+                                                                    to={''}
+                                                                    className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                                                                >
+                                                                    View
+                                                                </Link>
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <div className="flex-1 px-4 py-2 overflow-y-auto">
-                                            <h2 className='font-bold text-xl'>Participants</h2>
+                                            <h2 className='font-bold text-xl'>Participants:</h2>
                                             <div className="overflow-x-auto">
                                                 <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                                                     <thead className="ltr:text-left rtl:text-right">
@@ -83,26 +129,26 @@ export default function Sidebar({ participants }) {
                                                     </thead>
 
                                                     <tbody className="divide-y divide-gray-200">
-                                                        {participants ? participants.map((p) => (
+                                                        {participants ? participants.map((p, i) => (
 
 
-                                                            <tr>
+                                                            <tr key={i}>
                                                                 <td className="whitespace-nowrap px-4 py-2">
                                                                     <div
                                                                         className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
                                                                     >
-                                                                        <img class="w-8 h-8 rounded-full" src={p.profileImage} alt={p.username} />
+                                                                        <img class="w-8 h-8 rounded-full" src={p.user.profileImage} alt={p.user.username} />
                                                                     </div>
                                                                 </td>
                                                                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                                                    {p.firstName} {p.lastName}
+                                                                    {p.user.firstName} {p.user.lastName}
                                                                 </td>
                                                                 <td className="whitespace-nowrap px-4 py-2 text-gray-700"></td>
 
 
                                                                 <td className="whitespace-nowrap px-4 py-2">
                                                                     <Link
-                                                                        to={`/users/${p._id}`}
+                                                                        to={`/users/${p.user._id}`}
                                                                         className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
                                                                     >
                                                                         View

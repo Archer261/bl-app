@@ -10,15 +10,13 @@ const Profile = () => {
     const { data, loading, error } = useAxios(`/api/users/${id}`);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <span className="loading loading-spinner text-error"></span>;
     }
 
     if (error) {
         return <div>Error: {error.message}</div>;
     }
 
-
-    console.log(data)
     return (
         <div className="bg-gray-100 max-h-screen">
             <div className="max-w-3xl mx-auto px-4 py-8">

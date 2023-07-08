@@ -32,6 +32,7 @@ const LeaderboardList = ({ participants }) => {
         <div className="max-w-lg mx-auto">
             <ul className="divide-y divide-gray-200">
                 <motion.li
+                    key='noPlayers'
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
@@ -49,21 +50,21 @@ const LeaderboardList = ({ participants }) => {
                         transition={{ duration: 0.5 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        class="pb-3 sm:pb-4">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex-shrink-0">
-                                <img class="w-8 h-8 rounded-full" src={player.profileImage} alt={player.username} />
+                        className="pb-3 sm:pb-4">
+                        <div className="flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                                <img className="w-8 h-8 rounded-full" src={player.user.profileImage} alt={player.user.username} />
                             </div>
-                            <div class="flex-1 min-w-0">
-                                <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                                    {player.firstName}
+                            <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    {player.user.firstName}
                                 </p>
-                                <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                                    {player.email}
+                                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    {player.user.email}
                                 </p>
                             </div>
-                            <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
-                                {player.score}
+                            <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
+
                             </div>
                         </div>
                     </motion.li>

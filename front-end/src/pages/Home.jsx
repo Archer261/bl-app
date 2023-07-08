@@ -33,7 +33,7 @@ const Home = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <span className="loading loading-spinner text-error"></span>;
     }
 
     if (error) {
