@@ -1,4 +1,4 @@
-import { Challenge, WeighIn } from '../models/Challenge.js';
+import { Challenge, WeighIn, Participant } from '../models/Challenge.js';
 import User from '../models/User.js';
 
 // Create a new challenge
@@ -27,13 +27,15 @@ export const getAllChallengeById = async (req, res) => {
     try {
         const challenge = await Challenge.findById(req.params.id)
             .populate({
-                path: 'participants',
-                select: 'email firstName lastName username profileImage'
+                path: 'participants.user',
+                select: '-password'
             }).populate({
                 path: 'weighIns.user',
                 select: '-password'
+            }).populate({
+                path: 'organizer',
+                select: '-password'
             })
-
         if (!challenge) {
             return res.status(404).json({ error: 'Challenge not found' });
         }

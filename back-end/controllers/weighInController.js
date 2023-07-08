@@ -5,7 +5,7 @@ import { Challenge, WeighIn } from '../models/Challenge.js';
 export const createWeighIn = async (req, res) => {
     console.log('test: ' + req);
     try {
-        const { challengeId, userId, weight, weighInDate, size } = req.body;
+        const { challengeId, user, currentWeight, currentSize } = req.body;
 
         // Find the weight loss challenge based on the challenge ID
         const challenge = await Challenge.findById(challengeId);
@@ -19,7 +19,7 @@ export const createWeighIn = async (req, res) => {
         }
 
         // Add the weigh-in to the weighIns array
-        challenge.weighIns.push({ user: userId, weight: weight, weighInDate: weighInDate });
+        challenge.weighIns.push({ user: user, currentSize: currentSize, currentWeight: currentWeight, challengeId: challengeId });
 
         // Save the updated challenge with the new weigh-in
         await challenge.save();

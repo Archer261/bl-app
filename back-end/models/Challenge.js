@@ -1,12 +1,39 @@
 import mongoose from 'mongoose';
 
-const weighInSchema = new mongoose.Schema({
+const participantSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
-    weight: {
+    buyInStatus: {
+        type: Boolean,
+        default: false,
+    },
+    startingWeight: {
+        type: Number,
+    },
+    startingSize: {
+        type: Number,
+    },
+});
+
+const weighInSchema = new mongoose.Schema({
+    challengeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Challenge',
+        required: true
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
+    beginningWeight: {
+        type: Number,
+
+    },
+    currentWeight: {
         type: Number,
         required: true,
     },
@@ -14,21 +41,25 @@ const weighInSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-
-    size: {
+    beginningSize: {
         type: Number,
 
+    },
+    currentSize: {
+        type: Number,
     },
 });
 
 const challengeSchema = new mongoose.Schema({
     name: { type: String, required: true },
+    organizer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
-    participants: [{
-        type: mongoose.Schema.Types.ObjectId, ref: 'User',
-        buyInStatus: { type: Boolean, default: false }
-    }],
+    participants: [participantSchema],
     count: { type: Number, default: 0 },
     withSize: {
         type: Boolean,
@@ -41,14 +72,11 @@ const challengeSchema = new mongoose.Schema({
     isFeatured: {
         type: Boolean,
         default: false,
-    }
-
+    },
 });
 
 challengeSchema.virtual('weekCount').get(function () {
-    const weeks = Math.ceil(
-        (this.endDate - this.startDate) / (7 * 24 * 60 * 60 * 1000)
-    );
+    const weeks = Math.ceil((this.endDate - this.startDate) / (7 * 24 * 60 * 60 * 1000));
     return weeks;
 });
 
@@ -61,5 +89,6 @@ challengeSchema.set('toJSON', { virtuals: true });
 
 const WeighIn = mongoose.model('WeighIn', weighInSchema);
 const Challenge = mongoose.model('Challenge', challengeSchema);
+const Participant = mongoose.model('Participant', participantSchema);
 
-export { WeighIn, Challenge };
+export { WeighIn, Challenge, Participant };
