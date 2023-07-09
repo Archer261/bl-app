@@ -14,7 +14,7 @@ const LoginPage = () => {
 
 
     useEffect(() => {
-        if (!token && location.pathname !== '/signup' || !location.pathname.startsWith('/challenge')) {
+        if (!token && location.pathname !== '/signup') {
             // Redirect the user to the login page or any other appropriate action
             navigate('/login');
         } else {
