@@ -30,15 +30,14 @@ const Hero = ({ challenge }) => {
                         {challenge.weekCount} Weeks
                     </p>
 
-                    <div class="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
+                    <div className="card border w-96 hover:shadow-none relative flex flex-col mx-auto shadow-lg m-5">
                         <img
                             src={logo}
-                            class="mx-auto mb-4 w-32 rounded-lg"
                             alt="Avatar"
-                            className='w-28 h-28 p-1 bg-white rounded-full'
+                            className='w-28 h-28 p-1 bg-white rounded-full mx-auto mb-4'
                         />
-                        <h5 class="title mt-11 ml-3 font-bold flex flex-col">Foundry</h5>
-                        <p class="text-neutral-900 dark:text-neutral-500">Organizer</p>
+                        <h5 className="title mt-11 ml-3 font-bold flex flex-col">Foundry</h5>
+                        <p className="text-neutral-900 dark:text-neutral-500">Organizer</p>
                     </div>
 
                     <div className="mt-4 md:mt-8">

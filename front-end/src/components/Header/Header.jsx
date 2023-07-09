@@ -79,6 +79,18 @@ const Header = () => {
                 </nav>
 
                 <div className="flex items-center gap-4">
+                    {!isMobile && (
+                        !isAuthenticated &&
+                        <Link
+                            to={'/login'}
+                        ><div
+                            className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer"
+                        >
+                                Login
+                            </div>
+                        </Link>
+
+                    )}
                     {isAuthenticated && (
                         <div className="sm:flex sm:gap-4">
                             <Link to={`/users/${user.id}`} className="block shrink-0">
@@ -182,9 +194,22 @@ const Header = () => {
                                             )}
                                         </>
                                     )}
+                                    {!isAuthenticated &&
+                                        <li>
+                                            <Link to="/login">
+                                                <button
+                                                    className="block px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-800 cursor-pointer"
+                                                    onClick={handleClickOption}
+                                                >
+                                                    Login
+                                                </button>
+                                            </Link>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
                         )}
+
                     </div>
                 </div>
             </div>

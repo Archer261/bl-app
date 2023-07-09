@@ -13,7 +13,7 @@ const AuthProvider = ({ children, initialToken }) => {
     const [error, setError] = useState(null);
 
     const login = (response) => {
-        console.log(response);
+
         const { token, user, error } = response.data;
 
         if (token && user) {
@@ -26,7 +26,7 @@ const AuthProvider = ({ children, initialToken }) => {
             setUser(user);
         } else {
             setError(error);
-            console.log(response.data)
+
         }
     };
 
@@ -66,7 +66,7 @@ const AuthProvider = ({ children, initialToken }) => {
                 const storedUser = JSON.parse(localStorage.getItem('user'));
                 setUser(storedUser);
             } else {
-                if (location.pathname !== '/signup') {
+                if (location.pathname !== '/signup' && !location.pathname.startsWith('/challenge')) {
                     navigate('/login'); // Redirect to the login page if not authenticated and no stored token
                 }
             }

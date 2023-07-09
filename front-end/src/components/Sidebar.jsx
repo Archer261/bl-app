@@ -87,7 +87,7 @@ export default function Sidebar({ participants, organizer }) {
                                                                 <div
                                                                     className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
                                                                 >
-                                                                    <img class="w-8 h-8 rounded-full" src={organizer.profileImage} alt='Organizer' />
+                                                                    <img className="w-8 h-8 rounded-full" src={organizer.profileImage} alt='Organizer' />
                                                                 </div>
                                                             </td>
                                                             <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
@@ -137,7 +137,7 @@ export default function Sidebar({ participants, organizer }) {
                                                                     <div
                                                                         className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
                                                                     >
-                                                                        <img class="w-8 h-8 rounded-full" src={p.user.profileImage} alt={p.user.username} />
+                                                                        <img className="w-8 h-8 rounded-full" src={p.user.profileImage} alt={p.user.username} />
                                                                     </div>
                                                                 </td>
                                                                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
