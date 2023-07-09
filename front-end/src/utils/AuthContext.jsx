@@ -59,6 +59,7 @@ const AuthProvider = ({ children, initialToken }) => {
 
     useEffect(() => {
         // Check if the user is authenticated on component mount
+        console.log(location.pathname)
         if (!isAuthenticated) {
             const storedToken = localStorage.getItem('token');
             if (storedToken) {
@@ -67,6 +68,7 @@ const AuthProvider = ({ children, initialToken }) => {
                 setUser(storedUser);
             } else {
                 if (location.pathname !== '/signup' && !location.pathname.startsWith('/challenge')) {
+
                     navigate('/login'); // Redirect to the login page if not authenticated and no stored token
                 }
             }
