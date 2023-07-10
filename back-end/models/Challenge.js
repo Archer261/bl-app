@@ -4,7 +4,6 @@ const participantSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true,
     },
     buyInStatus: {
         type: Boolean,
@@ -12,9 +11,11 @@ const participantSchema = new mongoose.Schema({
     },
     startingWeight: {
         type: Number,
+        select: false,
     },
     startingSize: {
         type: Number,
+        select: false,
     },
 });
 
@@ -55,7 +56,6 @@ const challengeSchema = new mongoose.Schema({
     organizer: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
     },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
@@ -73,6 +73,10 @@ const challengeSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    createdDate: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 challengeSchema.virtual('weekCount').get(function () {
@@ -86,6 +90,46 @@ challengeSchema.pre('save', function (next) {
 });
 
 challengeSchema.set('toJSON', { virtuals: true });
+
+challengeSchema.virtual('prizePool').get(function () {
+    if (this.buyIn && this.participants) {
+        return this.buyIn * this.participants.length;
+    }
+    return 0;
+});
+
+challengeSchema.path('buyIn').set(function (buyIn) {
+    this._previousBuyIn = this.buyIn; // Store the previous value of buyIn
+    return buyIn;
+});
+
+challengeSchema.path('participants').set(function (participants) {
+    this._previousParticipants = this.participants; // Store the previous value of participants
+    return participants;
+});
+
+challengeSchema.pre('save', function (next) {
+    if (this.isModified('buyIn') || this.isModified('participants')) {
+        // Check if buyIn or participants field has been modified
+        if (
+            this.isModified('buyIn') &&
+            this._previousBuyIn &&
+            this._previousParticipants &&
+            this._previousParticipants.length !== this.participants.length
+        ) {
+            // Check if both buyIn and participants have changed
+            this.prizePool = this.buyIn * this.participants.length;
+        } else if (this.isModified('buyIn')) {
+            // Only buyIn field has changed
+            this.prizePool +=
+                (this.buyIn - this._previousBuyIn) * this.participants.length;
+        } else {
+            // Only participants field has changed
+            this.prizePool = this.buyIn * this.participants.length;
+        }
+    }
+    next();
+});
 
 const WeighIn = mongoose.model('WeighIn', weighInSchema);
 const Challenge = mongoose.model('Challenge', challengeSchema);

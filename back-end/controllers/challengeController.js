@@ -28,7 +28,7 @@ export const getAllChallengeById = async (req, res) => {
         const challenge = await Challenge.findById(req.params.id)
             .populate({
                 path: 'participants.user',
-                select: '-password'
+                select: '-password -startingWeight -startingSize'
             }).populate({
                 path: 'weighIns.user',
                 select: '-password'
