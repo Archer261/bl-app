@@ -61,7 +61,7 @@ const Challenges = () => {
                 </div>
                 {user && (
                     user.isAdmin && (
-                        <div className="card-actions justify-center">
+                        <div className="card-actions justify-center pt-5">
                             <Link to={`/create-challenge`}><button className="btn btn-secondary">Create New Challenge</button></Link>
                         </div>
                     )
