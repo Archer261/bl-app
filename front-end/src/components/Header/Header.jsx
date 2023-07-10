@@ -131,7 +131,7 @@ const Header = () => {
                             </svg>
                         </button>
                         {showMenu && (
-                            <div className="absolute z-10 top-12 right-0 bg-white shadow-lg rounded-md w-40">
+                            <div className="absolute z-50 top-12 right-0 bg-white shadow-lg rounded-md w-40">
                                 <ul className="py-2">
                                     {isAuthenticated && (
                                         <>

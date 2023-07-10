@@ -31,7 +31,7 @@ const AuthProvider = ({ children, initialToken }) => {
     };
 
     const signup = (response) => {
-        console.log(response);
+
         const { token, user, error } = response.data;
 
         if (token && user) {
@@ -59,7 +59,6 @@ const AuthProvider = ({ children, initialToken }) => {
 
     useEffect(() => {
         // Check if the user is authenticated on component mount
-        console.log(location.pathname)
         if (!isAuthenticated) {
             const storedToken = localStorage.getItem('token');
             if (storedToken) {
@@ -67,8 +66,7 @@ const AuthProvider = ({ children, initialToken }) => {
                 const storedUser = JSON.parse(localStorage.getItem('user'));
                 setUser(storedUser);
             } else {
-                if (location.pathname !== '/signup' && !location.pathname.startsWith('/challenge')) {
-
+                if (location.pathname !== '/signup') {
                     navigate('/login'); // Redirect to the login page if not authenticated and no stored token
                 }
             }

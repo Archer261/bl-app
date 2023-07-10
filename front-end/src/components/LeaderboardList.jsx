@@ -56,10 +56,10 @@ const LeaderboardList = ({ participants }) => {
                                 <img className="w-8 h-8 rounded-full" src={player.user.profileImage} alt={player.user.username} />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                <p className="text-sm font-medium text-gray-900 truncate dark:text-red-800">
                                     {player.user.firstName}
                                 </p>
-                                <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                                <p className="text-sm text-gray-500 truncate dark:text-gray-800">
                                     {player.user.email}
                                 </p>
                             </div>

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar({ participants, organizer }) {
     const [open, setOpen] = useState(false);
-
     return (
         <>
             {!open && (

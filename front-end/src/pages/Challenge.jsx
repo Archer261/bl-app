@@ -41,7 +41,6 @@ const Challenge = () => {
     }
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
-
     return (
         <>
             <Sidebar participants={participants} organizer={challengeData.organizer} />

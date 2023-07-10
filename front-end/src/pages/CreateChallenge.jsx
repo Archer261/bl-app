@@ -56,7 +56,7 @@ const CreateChallenge = () => {
 
         // Send login request to backend server
         axios
-            .post('/api/challenge', { user: user, name: challengeName, startDate, endDate, buyIn, withSize, participants: participants })
+            .post('/api/challenge', { user: user, name: challengeName, startDate, endDate, buyIn, withSize, participants: participants, orgainzer: user })
             .then((response) => {
                 navigate(`/challenge/${response.data._id}`)
                 // Handle successful login

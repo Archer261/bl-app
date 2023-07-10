@@ -29,78 +29,68 @@ const Top3 = ({ title, participants }) => {
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-stretch">
 
                         <div className="col-span-3 lg:col-span-4 lg:py-4">
-                            <ul className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4">
-                                <li className="w-full">
+                            <ul className="flex justify-center gap-4">
+                                <li>
                                     <motion.div
                                         variants={imageVariants}
                                         initial="hidden"
                                         animate="visible"
                                         transition={{ duration: 0.5, delay: 0.4 }}
-
-
                                     >
                                         <a href="#" className="block group">
                                             <img
                                                 src={second}
                                                 alt=""
-                                                className="object-cover w-full rounded aspect-square"
+                                                className="object-cover w-32 h-32 rounded aspect-square"
                                             />
 
                                             <div className="mt-3">
                                                 <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
                                                     {/* Add content */}
                                                 </h3>
-
-
                                             </div>
                                         </a>
                                     </motion.div>
                                 </li>
-                                <li className="w-full">
+                                <li>
                                     <motion.div
                                         variants={imageVariants}
                                         initial="hidden"
                                         animate="visible"
                                         transition={{ duration: 0.5, delay: 0.6 }}
-
-
                                     >
                                         <a href="#" className="block group">
                                             <img
                                                 src={first}
                                                 alt=""
-                                                className="object-cover w-full rounded aspect-square"
+                                                className="object-cover w-32 h-32 rounded aspect-square"
                                             />
 
                                             <div className="mt-3">
                                                 <h3 className="font-medium text-gray-900 group-hover:underline group-hover:underline-offset-4">
                                                     {/* Add content */}
                                                 </h3>
-
-
                                             </div>
                                         </a>
                                     </motion.div>
                                 </li>
 
-                                <li className="w-full">
+                                <li>
                                     <motion.div
                                         variants={imageVariants}
                                         initial="hidden"
                                         animate="visible"
                                         transition={{ duration: 0.5, delay: 0.2 }}
-
                                     >
                                         <a href="#" className="block group">
                                             <img
                                                 src={third}
                                                 alt=""
-                                                className="object-cover w-full rounded aspect-square"
+                                                className="object-cover w-32 h-32 rounded aspect-square"
                                             />
 
                                             <div className="mt-3">
-
-
+                                                {/* Add content */}
                                             </div>
                                         </a>
                                     </motion.div>
