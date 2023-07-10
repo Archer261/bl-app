@@ -51,7 +51,7 @@ const Challenge = () => {
                         <div className="max-h-full rounded-lg"><Top3 title={"Top Weight Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
                         <div className="max-h-full rounded-lg"><Top3 title={"Top Size Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
                     </div>
-                    : <><Top3 title={"Top Weight Losers"} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
+                    : <><Top3 title={"Top Weight Losers!"} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
                 }
             </div>
         </>
