@@ -1,11 +1,31 @@
-import React, { useState } from "react";
-import { useParams } from "react-router";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useLocation } from "react-router";
 import { AuthContext } from '../utils/AuthContext';
 import useAxios from "../utils/useAxios";
 
 const Profile = () => {
     const [isButtonClicked, setButtonClicked] = useState(false);
+    const [isMe, setIsMe] = useState(false);
+
     const { id } = useParams();
+    const { user } = useContext(AuthContext);
+    const location = useLocation();
+
+    useEffect(() => {
+        checkUser();
+
+        return () => {
+
+        }
+    }, [location])
+
+    const checkUser = () => {
+        if (id === user.id) {
+            setIsMe(true);
+        } else {
+            setIsMe(false);
+        }
+    }
 
     const { data, loading, error } = useAxios(`/api/users/${id}`);
 
@@ -29,14 +49,16 @@ const Profile = () => {
             <div className="bg-white rounded-lg shadow-lg">
                 <div className="flex justify-between items-center px-8 py-6 border-b">
                     <h1 className="text-2xl font-bold">Profile</h1>
-                    <button
-                        className={`bg-red-600 hover:bg-red-800 text-white font-bold px-4 py-2 rounded ${isButtonClicked ? 'cursor-default' : 'cursor-pointer'
-                            }`}
-                        onClick={handleButtonClick}
-                        disabled={isButtonClicked}
-                    >
-                        {isButtonClicked ? 'Coming soon...' : 'Edit Profile'}
-                    </button>
+                    {isMe &&
+                        <button
+                            className={`bg-red-600 hover:bg-red-800 text-white font-bold px-4 py-2 rounded ${isButtonClicked ? 'cursor-default' : 'cursor-pointer'
+                                }`}
+                            onClick={handleButtonClick}
+                            disabled={isButtonClicked}
+                        >
+                            {isButtonClicked ? 'Coming soon...' : 'Edit Profile'}
+                        </button>
+                    }
                 </div>
                 <div className="flex flex-col md:flex-row p-8">
                     <div className="w-full md:w-1/4">
