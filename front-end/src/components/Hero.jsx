@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { logo } from '../assets/';
+import { base, logo } from '../assets/';
 import DateFormatted from '../utils/DateFormatted';
 
 const Hero = ({ challenge }) => {
@@ -53,7 +53,7 @@ const Hero = ({ challenge }) => {
             <div className="flex justify-center items-center p-8">
                 <img
                     alt="challenge"
-                    src={logo}
+                    src={base}
                     className="h-auto object-contain sm:h-auto max-w-full max-h-96"
                 />
             </div>

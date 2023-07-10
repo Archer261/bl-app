@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import useAxios from '../utils/useAxios';
 import DateFormatted from '../utils/DateFormatted';
 import { AuthContext } from '../utils/AuthContext';
+import { logo, base } from '../assets';
 
 const Challenges = () => {
     const { isAuthenticated, logout, user } = useContext(AuthContext);
@@ -29,13 +30,32 @@ const Challenges = () => {
                     {data.map((c, index) => (
                         <motion.div
                             key={c._id}
-                            className="bg-white block rounded-xl border border-gray-300 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-pink-500/10"
+                            className="overflow-hidden rounded-lg shadow transition hover:shadow-lg"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: index * 0.2 }}
                         >
                             <Link to={`/challenge/${c._id}`}>
-                                <svg
+                                <img
+                                    alt="Office"
+                                    src={base}
+                                    className="h-56 w-full object-cover"
+                                />
+
+                                <div className="bg-white p-4 sm:p-6">
+                                    <h3 className="mt-0.5 text-2xl text-gray-900">
+                                        {c.name}
+                                    </h3>
+
+                                    <DateFormatted dateValue={c.startDate} textValue={'Start Date: '} />
+                                    <DateFormatted dateValue={c.endDate} textValue={'End Date: '} />
+
+
+                                    <p className="mt-2 line-clamp-3 text-sm/relaxed text-gray-500">
+                                        {/* Organizer: {c.organizer} */}
+                                    </p>
+                                </div>
+                                {/* <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     className="h-10 w-10 text-pink-500"
                                     fill="none"
@@ -59,7 +79,7 @@ const Challenges = () => {
                                 <div className="mt-1 text-sm">
                                     <DateFormatted dateValue={c.startDate} textValue={'Start Date: '} />
                                     <DateFormatted dateValue={c.endDate} textValue={'End Date: '} />
-                                </div>
+                                </div> */}
                             </Link>
                         </motion.div>
                     ))}
