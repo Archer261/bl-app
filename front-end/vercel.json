@@ -1,13 +1,13 @@
 {
   "github": {
-  "silent": true
-},
-"rewrites": [
-  {
-    "source": "(.*)",
-    "destination": "/index.html"
-  }
-],
+    "silent": true
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
@@ -15,7 +15,8 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/$1"
+      "dest": "/$1",
+      "status": 200
     }
   ]
 }
