@@ -14,6 +14,7 @@ const CreateChallenge = () => {
     const [endDate, setEndDate] = useState('');
     const [buyIn, setBuyIn] = useState('');
     const [withSize, setWithSize] = useState(false);
+    const [organizer, setOrganizer] = useState(false);
 
     const { user } = useContext(AuthContext);
 
@@ -37,7 +38,7 @@ const CreateChallenge = () => {
         }
     };
 
-    const handleUserSelection = (event) => {
+    const handleParticipantSelection = (event) => {
         const selectedUserId = event.target.value;
         const selectedUser = users.find(user => user._id === selectedUserId);
         setSelectedUser(selectedUser);
@@ -45,11 +46,27 @@ const CreateChallenge = () => {
 
     };
 
-    const addToSelected = (option) => {
-        setSelectedOptions([...selectedOptions, option.name]);
-        setParticipants([...participants, { _id: option._id, buyInStatus: false }])
+    const handleOrganizerSelection = (event) => {
+        const selectedUserId = event.target.value;
+        const selectedUser = users.find(user => user._id === selectedUserId);
+        setSelectedUser(selectedUser);
+        setOrganizer(selectedUser);
 
     };
+
+    const addToSelected = (option) => {
+
+        const selectedOption = users.find(u => u._id === option._id)
+        setSelectedOptions([...selectedOptions, selectedOption]);
+        setParticipants([...participants, { _id: option._id, buyInStatus: false }])
+    };
+
+
+    const handleRemove = (id) => {
+        const selectedOption = selectedOptions.filter(item => item._id !== id)
+        //setSelectedOptions(selectedOption);
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -77,9 +94,8 @@ const CreateChallenge = () => {
             setWithSize(false);
 
         }
-
-
     }
+
     return (
         <section class="bg-white dark:bg-white rounded-lg">
             <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
@@ -107,6 +123,30 @@ const CreateChallenge = () => {
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Challenge Name</label>
                             <input onChange={(e) => setChallengeName(e.target.value)} type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type challenge name" required="" />
                         </div>
+
+                        <div>
+                            <label for="organizer" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Organizer</label>
+                            <select
+                                value={selectedUser}
+                                onChange={handleOrganizerSelection}
+                                disabled={isLoading}
+                                id="organizer"
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                            >
+                                <option selected="">Select Organizer</option>
+                                {isLoading ? (
+                                    <option value="" disabled>Loading...</option>
+                                ) : (
+                                    users.map((user) => (
+                                        <option key={user._id} value={user._id}>
+                                            {user.username}
+                                        </option>
+                                    ))
+                                )}
+                            </select>
+
+                        </div>
+
                         <div class="w-full">
                             <label for="startDate" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Start Date</label>
                             <input onChange={(e) => setStartDate(e.target.value)} type="date" name="startDate" id="startDate" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Challenge start date" required="" />
@@ -120,7 +160,7 @@ const CreateChallenge = () => {
                             <label for="participants" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Participants</label>
                             <select
                                 value={selectedUser}
-                                onChange={handleUserSelection}
+                                onChange={handleParticipantSelection}
                                 disabled={isLoading}
                                 id="participants"
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -143,10 +183,52 @@ const CreateChallenge = () => {
                             <input onChange={(e) => setBuyIn(e.target.value)} type="number" name="buyIn" id="buyIn" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$10" required="" />
                         </div>
 
-                        <div class="sm:col-span-2">
+                        {selectedOptions && (
+                            <div class="w-full col-span-2 container flex flex-wrap sm:col-span-3">
+                                {
+                                    selectedOptions.map((p) => (
+                                        <>
+                                            <div class="max-w-xs px-3 py-3 lg:max-w-lg">
+                                                <div class="bg-white shadow-xl rounded-lg py-3">
+                                                    <div class="photo-wrapper p-2">
+                                                        <img class="w-auto max-h-24 rounded-full mx-auto" src={p.profileImage} alt={p.firstName} />
+                                                    </div>
+                                                    <div class="p-2">
+                                                        <h3 class="text-center text-xl text-gray-900 font-medium leading-8">{p.firstName} {p.lastName}</h3>
+                                                        <div class="text-center text-gray-400 text-xs font-semibold">
+                                                            <p></p>
+                                                        </div>
+                                                        <table class="text-xs my-1">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="px-2 py-1 text-gray-500 font-semibold">Email</td>
+                                                                    <td class="px-2 py-1">{p.email}</td>
+                                                                </tr>
+                                                            </tbody></table>
+
+                                                        <div class="text-center my-3">
+                                                            <button
+                                                                type='button'
+                                                                onClick={handleRemove(p._id)}
+                                                                className="text-xs text-indigo-500 italic hover:underline hover:text-indigo-600 font-medium">Remove
+                                                            </button>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </>
+                                    )
+                                    )
+                                }</div>
+
+                        )}
+
+                        {/* <div class="sm:col-span-2">
                             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Selected Participants</label>
                             <textarea value={selectedOptions} id="description" rows="8" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-white dark:border-gray-300 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder=""></textarea>
-                        </div>
+                        </div> */}
                     </div>
                     <button type="submit" class=" bg-red-700 text-white inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center gray-900 bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
                         Create Challenge

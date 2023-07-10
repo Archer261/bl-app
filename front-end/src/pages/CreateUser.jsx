@@ -11,12 +11,16 @@ const CreateUser = () => {
     const [firstName, setFirstName] = useState('');
     const [password, setPassword] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isTest, setIsTest] = useState(false);
 
     const { token, user, isAuthenticated } = useContext(AuthContext);
 
-    const handleToggle = () => {
+    const handleAdminToggle = () => {
         setIsAdmin(!isAdmin);
-        console.log(isAdmin)
+
+    };
+    const handleTestToggle = () => {
+        setIsTest(!isTest);
     };
 
     const navigate = useNavigate();
@@ -36,19 +40,6 @@ const CreateUser = () => {
                 console.error(error);
             });
     };
-
-    const handleisAdmin = (e) => {
-        if (e.target.value === 'on') {
-            console.log(e.target.value)
-            setIsAdmin(true);
-
-        } else {
-            setIsAdmin(false);
-            console.log(e.target.value)
-        }
-        console.log(isAdmin)
-        console.log(e.target.value)
-    }
     return (
         <section class="bg-white dark:bg-white rounded-lg">
             <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
@@ -56,21 +47,38 @@ const CreateUser = () => {
                 <form onSubmit={handleSubmit}>
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         {user.isAdmin &&
-                            <div class="flex items-center">
-                                <label className="relative inline-flex items-center cursor-pointer">
-                                    <input
-                                        type="checkbox"
-                                        value=""
-                                        className="sr-only peer"
-                                        checked={!isAdmin}
-                                        onChange={handleToggle}
-                                    />
-                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-                                    <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                        Admin
-                                    </span>
-                                </label>
-                            </div>
+                            <>
+                                <div class="flex items-center">
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            value=""
+                                            className="sr-only peer"
+                                            checked={!isAdmin}
+                                            onChange={handleAdminToggle}
+                                        />
+                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Admin
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <label className="relative inline-flex items-center cursor-pointer">
+                                        <input
+                                            type="checkbox"
+                                            value=""
+                                            className="sr-only peer"
+                                            checked={!isTest}
+                                            onChange={handleTestToggle}
+                                        />
+                                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-white peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                                        <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                            Test
+                                        </span>
+                                    </label>
+                                </div>
+                            </>
                         }
                         <div class="sm:col-span-2">
                             <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">First Name</label>
@@ -97,7 +105,7 @@ const CreateUser = () => {
                             <input onChange={(e) => setProfileImage(e.target.value)} type="text" name="profileImage" id="profileImage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="" />
                         </div>
                     </div>
-                    <button type="submit" class=" bg-red-700 text-white inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center gray-900 bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                    <button type="submit" class=" bg-red-600 text-white inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center gray-900 bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-red-700">
                         Create User
                     </button>
                 </form>

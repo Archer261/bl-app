@@ -3,8 +3,14 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 
-export default function Sidebar({ participants, organizer }) {
+export default function Sidebar({ participants, organizer, isOrganizer, setParticipants }) {
     const [open, setOpen] = useState(false);
+
+
+    const onClickRemove = (e) => {
+        const updatedData = participants.filter(p => p._id !== e.target.id);
+    }
+
     return (
         <>
             {!open && (
@@ -102,6 +108,7 @@ export default function Sidebar({ participants, organizer }) {
                                                                 >
                                                                     View
                                                                 </Link>
+
                                                             </td>
                                                         </tr>
 
@@ -131,7 +138,7 @@ export default function Sidebar({ participants, organizer }) {
                                                         {participants ? participants.map((p, i) => (
 
 
-                                                            <tr key={i}>
+                                                            <tr key={p._id}>
                                                                 <td className="whitespace-nowrap px-4 py-2">
                                                                     <div
                                                                         className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
@@ -152,6 +159,18 @@ export default function Sidebar({ participants, organizer }) {
                                                                     >
                                                                         View
                                                                     </Link>
+                                                                    {isOrganizer && (
+                                                                        <button
+                                                                            id={p._id}
+                                                                            className=" mx-2 inline-block  px-4 py-2 text-xs font-medium text-white "
+                                                                            onClick={onClickRemove}
+                                                                        >
+                                                                            <svg width="24px" height="px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12ZM8.25 11.25C7.83579 11.25 7.5 11.5858 7.5 12C7.5 12.4142 7.83579 12.75 8.25 12.75L15.75 12.75C16.1642 12.75 16.5 12.4142 16.5 12C16.5 11.5858 16.1642 11.25 15.75 11.25L8.25 11.25Z" fill="#dc2626" />
+                                                                            </svg>
+
+                                                                        </button>)
+                                                                    }
                                                                 </td>
                                                             </tr>
 

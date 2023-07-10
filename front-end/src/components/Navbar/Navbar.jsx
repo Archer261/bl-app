@@ -28,8 +28,9 @@ const Navbar = () => {
                 {isAuthenticated && (
                     <>
                         <ul className="flex space-x-4">
+                            <Link to={'/'}><li className="text-black hover:text-blue-200">Home</li></Link>
                             <li><a href="#" className="text-black hover:text-blue-200">My Challenges</a></li>
-                            <li><a href="/challenge" className="text-black hover:text-blue-200">Leaderboards</a></li>
+                            <Link to={'/challenge'}><li className="text-black hover:text-blue-200">Leaderboards</li></Link>
                             <li><a href="#" className="text-black hover:text-blue-200">Contact</a></li>
                         </ul>
 

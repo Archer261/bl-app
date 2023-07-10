@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { LeaderboardList, Top3, Sidebar } from '../components'
 import { useParams } from "react-router";
 import { AuthContext } from '../utils/AuthContext';
@@ -8,11 +8,13 @@ import axios from 'axios';
 
 const Challenge = () => {
 
+    const { user } = useContext(AuthContext);
     const { id } = useParams();
     const [challengeData, setChallengeData] = useState(null);
     const [participants, setParticipants] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [isOrganizer, setIsOrganizer] = useState(false)
 
     useEffect(() => {
         const fetchChallengeData = async () => {
@@ -21,7 +23,7 @@ const Challenge = () => {
                 setChallengeData(response.data);
                 setParticipants(response.data.participants);
                 //fetchParticipants(response.data.participants)
-
+                checkOrgainzer(response.data.organizer._id);
                 setLoading(false);
             } catch (error) {
                 setError(error);
@@ -29,7 +31,17 @@ const Challenge = () => {
             }
         };
 
+        const checkOrgainzer = (organizerId) => {
+
+            if (organizerId === user.id) {
+                setIsOrganizer(true);
+            } else {
+                setIsOrganizer(false);
+            }
+        }
+
         fetchChallengeData();
+
     }, [id]);
 
     if (loading) {
@@ -39,11 +51,12 @@ const Challenge = () => {
     if (error) {
         return <div>Error: {error.message}</div>;
     }
+
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
     return (
         <>
-            <Sidebar participants={participants} organizer={challengeData.organizer} />
+            <Sidebar participants={participants} organizer={challengeData.organizer} isOrganizer={isOrganizer} setParticipants={setParticipants} />
             <div>
                 <CountdownTimer startDateTime={sd} endDateTime={ed} />
                 {JSON.parse(challengeData.withSize) ?

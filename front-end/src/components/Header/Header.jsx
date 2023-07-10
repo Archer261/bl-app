@@ -51,6 +51,28 @@ const Header = () => {
                         <>
                             <ul className="flex items-center gap-6 text-sm">
                                 <li>
+                                    <Link to={'/'}>
+                                        <a
+                                            className={`text-gray-500 transition hover:text-gray-500/75 ${location.pathname === '/challenge' ? 'font-semibold' : ''
+                                                }`}
+                                            onClick={handleClickOption}
+                                        >
+                                            Home
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to={`/users/${user.id}`}>
+                                        <a
+                                            className={`text-gray-500 transition hover:text-gray-500/75 ${location.pathname === '/challenge' ? 'font-semibold' : ''
+                                                }`}
+                                            onClick={handleClickOption}
+                                        >
+                                            Profile
+                                        </a>
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link to={'/challenge'}>
                                         <a
                                             className={`text-gray-500 transition hover:text-gray-500/75 ${location.pathname === '/challenge' ? 'font-semibold' : ''
