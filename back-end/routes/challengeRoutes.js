@@ -1,6 +1,6 @@
 import express from 'express';
 import { createChallenge, getAllChallenges, getAllChallengeById, updateChallenge, deleteChallenge } from '../controllers/challengeController.js'
-// import { } from '../middleware/authMiddleware';
+import { createParticipant, getParticipants, getParticipantById, updateParticipant, deleteParticipant } from '../controllers/participantController.js'
 import { isAdmin } from '../middleware/checkAdmin.js'
 
 const router = express.Router();
@@ -19,5 +19,20 @@ router.put('/:id', updateChallenge);
 
 // Delete a challenge
 router.delete('/:id', deleteChallenge);
+
+// Retrieve single participant
+router.get('/:challengeId/participants/:participantId', getParticipantById);
+
+// Retrieve single participant
+router.get('/:challengeId/participants', getParticipants);
+
+// Create a new participant
+router.post('/:challengeId/participants', createParticipant);
+
+// Update a participant
+router.put('/:challengeId/participants/:id', updateParticipant);
+
+// Delete a challenge
+router.delete('/:id', deleteParticipant);
 
 export default router;

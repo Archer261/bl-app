@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const participantSchema = new mongoose.Schema({
+    challenge: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Challenge',
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -11,11 +15,11 @@ const participantSchema = new mongoose.Schema({
     },
     startingWeight: {
         type: Number,
-        select: false,
+
     },
     startingSize: {
         type: Number,
-        select: false,
+
     },
 });
 
@@ -23,7 +27,6 @@ const weighInSchema = new mongoose.Schema({
     challengeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Challenge',
-        required: true
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,

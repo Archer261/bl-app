@@ -4,7 +4,7 @@ import User from '../models/User.js'
 export const getUser = async (req, res) => {
 
     try {
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId).select('-password');
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
@@ -18,7 +18,7 @@ export const getUser = async (req, res) => {
 // Get all Users
 export const getAllUsers = async (req, res) => {
     try {
-        const users = await User.find();
+        const users = await User.find().select('-password');
         res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch users' });
@@ -28,24 +28,22 @@ export const getAllUsers = async (req, res) => {
 
 // Update User Profile
 export const updateUser = async (req, res) => {
-    const { name, email } = req.body;
-
     try {
+        console.log(req)
         const user = await User.findById(req.params.userId);
+        console.log(user);
 
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        if (user.id !== req.user.id) {
-            return res.status(401).json({ message: 'Unauthorized' });
-        }
+        Object.keys(req.body).forEach((key) => {
+            user[key] = req.body[key];
+        });
 
-        user.name = name;
-        user.email = email;
         await user.save();
 
-        res.json({ message: 'Profile updated successfully' });
+        res.json({ message: 'Profile updated successfully', user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
