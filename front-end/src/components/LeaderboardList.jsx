@@ -60,7 +60,7 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                     >
                         <span className="text-gray-500">Place</span>
                         <span className="ml-3 font-medium">Name</span>
-                        <span className="ml-60 text-gray-500">% Change</span>
+                        <span className="ml-40 mr-2 text-gray-500">% Change</span>
                     </motion.li>
                     {participants.map((player) => (
                         <motion.li
