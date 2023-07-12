@@ -23,7 +23,7 @@ const Challenge = () => {
                 const response = await axios.get(`/api/challenge/${id}`);
                 setChallengeData(response.data);
                 setParticipants(response.data.participants);
-                //fetchParticipants(response.data.participants)
+
                 checkOrgainzer(response.data.organizer._id);
                 setLoading(false);
             } catch (error) {
