@@ -11,7 +11,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <div className="flex flex-col items-center pt-12 px-4 max-h-full h-full min-w-full bg-gradient-to-b from-red-300 to-white overflow-hidden">
+      <div className="flex flex-col items-center pt-12 px-4 pt-20 max-h-full h-full min-w-full bg-gradient-to-b from-red-300 to-white overflow-hidden">
         <AnimatePresence mode='wait'>
           <Routes>
             <Route path="/login" element={

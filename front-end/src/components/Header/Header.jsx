@@ -33,7 +33,7 @@ const Header = () => {
     };
 
     return (
-        <header className="bg-white">
+        <header className="bg-white fixed w-full">
             <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between px-4 sm:px-6 lg:px-8">
                 <Link to={'/'}>
                     <div className="text-black font-bold text-xl max-w-sm">
@@ -41,7 +41,7 @@ const Header = () => {
                             whileTap={{ scale: 0.9 }} // Shrinks on click
                             whileHover={{ scale: 1.02 }} // Grows on hover
                         >
-                            <img className="w-10" src={logo} />
+                            <img className="w-10" src={logo} alt="Logo" />
                         </motion.div>
                     </div>
                 </Link>
@@ -102,16 +102,13 @@ const Header = () => {
 
                 <div className="flex items-center gap-4">
                     {!isMobile && (
-                        !isAuthenticated &&
-                        <Link
-                            to={'/login'}
-                        ><div
-                            className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer"
-                        >
-                                Login
-                            </div>
-                        </Link>
-
+                        !isAuthenticated && (
+                            <Link to={'/login'}>
+                                <div className="block rounded-md bg-red-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-red-700 cursor-pointer">
+                                    Login
+                                </div>
+                            </Link>
+                        )
                     )}
                     {isAuthenticated && (
                         <div className="sm:flex sm:gap-4">
@@ -216,7 +213,7 @@ const Header = () => {
                                             )}
                                         </>
                                     )}
-                                    {!isAuthenticated &&
+                                    {!isAuthenticated && (
                                         <li>
                                             <Link to="/login">
                                                 <button
@@ -227,11 +224,10 @@ const Header = () => {
                                                 </button>
                                             </Link>
                                         </li>
-                                    }
+                                    )}
                                 </ul>
                             </div>
                         )}
-
                     </div>
                 </div>
             </div>
