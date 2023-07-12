@@ -5,7 +5,7 @@ import { Login, Profile, Home, Signup, CreateChallenge, Challenge, Challenges, C
 import { Header, Footer, Info, Topics, DatePickerModal } from './components';
 import { Routes, Route } from 'react-router';
 import { AuthContext, AuthProvider } from './utils/AuthContext';
-
+import './App.css';
 const App = () => {
 
   return (
