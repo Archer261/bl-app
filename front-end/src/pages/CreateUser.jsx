@@ -41,7 +41,7 @@ const CreateUser = () => {
             });
     };
     return (
-        <section class="bg-white dark:bg-white rounded-lg">
+        <section class="bg-white dark:bg-white rounded-lg h-full">
             <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:gray-900">Create New User</h2>
                 <form onSubmit={handleSubmit}>

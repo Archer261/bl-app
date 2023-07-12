@@ -60,7 +60,7 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                     >
                         <span className="text-gray-500">Place</span>
                         <span className="ml-3 font-medium">Name</span>
-                        <span className="ml-auto text-gray-500">% Change</span>
+                        <span className="ml-60 text-gray-500">% Change</span>
                     </motion.li>
                     {participants.map((player) => (
                         <motion.li
@@ -70,7 +70,7 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                             transition={{ duration: 0.5 }}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="pb-3 sm:pb-4">
+                            className="py-3 sm:py-4">
                             <div className="flex items-center space-x-4">
                                 <div className="flex-shrink-0">
                                     <img className="w-8 h-8 rounded-full" src={player.user.profileImage} alt={player.user.username} />
@@ -83,7 +83,7 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                                         {player.user.email}
                                     </p>
                                 </div>
-                                <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
+                                <div className=" min-w-15 inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
 
                                 </div>
                                 {isOrganizer && (

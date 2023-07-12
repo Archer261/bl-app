@@ -45,7 +45,7 @@ const Profile = () => {
     };
 
     return (
-        <div className="container mx-auto py-8">
+        <div className="container mx-auto py-8 h-full">
             <div className="bg-white rounded-lg shadow-lg">
                 <div className="flex justify-between items-center px-8 py-6 border-b">
                     <h1 className="text-2xl font-bold">Profile</h1>

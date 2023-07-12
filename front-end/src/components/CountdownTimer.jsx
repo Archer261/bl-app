@@ -42,7 +42,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
 
     if (isLoading) {
         return (
-            <div className="flex justify-center items-center">
+            <div className="flex-1 justify-center items-center">
                 <div className="text-center">
                     <span className="loading loading-dots loading-lg"></span>
                 </div>
@@ -51,7 +51,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
     }
 
     return (
-        <div className="flex justify-center items-center">
+        <div className="flex-1 justify-center items-center">
             <div className="text-center">
                 {remainingTime > 0 ? (
                     <>
