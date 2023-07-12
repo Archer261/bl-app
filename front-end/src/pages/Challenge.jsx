@@ -5,6 +5,7 @@ import { AuthContext } from '../utils/AuthContext';
 import useAxios from "../utils/useAxios";
 import CountdownTimer from '../components/CountdownTimer';
 import axios from 'axios';
+import PotCount from '../components/PotCount';
 
 const Challenge = () => {
 
@@ -56,15 +57,22 @@ const Challenge = () => {
     const ed = new Date(challengeData.endDate).getTime();
     return (
         <>
-            <Sidebar participants={participants} organizer={challengeData.organizer} isOrganizer={isOrganizer} setParticipants={setParticipants} />
+            <Sidebar challengeId={id} participants={participants} organizer={challengeData.organizer} isOrganizer={isOrganizer} setParticipants={setParticipants} />
             <div>
-                <CountdownTimer startDateTime={sd} endDateTime={ed} />
+                {challengeData.prizePool > 0 && (
+                    <div className='w-96 flex justify-self-center px-4 lg:ml-80 min-h-40'>
+                        <CountdownTimer startDateTime={sd} endDateTime={ed} />
+                        <div className="divider divider-horizontal"></div>
+                        <PotCount prize={challengeData.prizePool} />
+                    </div>
+                )
+                }
                 {JSON.parse(challengeData.withSize) ?
                     <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
-                        <div className="max-h-full rounded-lg"><Top3 title={"Top Weight Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
-                        <div className="max-h-full rounded-lg"><Top3 title={"Top Size Losers"} participants={participants} /><LeaderboardList participants={participants} /></div>
+                        <div className="max-h-full rounded-lg"><Top3 title={"Top Weight Losers"} participants={participants.filter((p) => { if (p.startingWeight && p.startingWeight !== null) { return p } })} isOrganizer={isOrganizer} challengeId={id} /><LeaderboardList participants={participants.filter((p) => { if (p.startingWeight && p.startingWeight !== null) { return p } })} isOrganizer={isOrganizer} challengeId={id} /></div>
+                        <div className="max-h-full rounded-lg"><Top3 title={"Top Size Losers"} participants={participants.filter((p) => { if (p.startingSize && p.startingSize !== null) { return p } })} isOrganizer={isOrganizer} challengeId={id} /><LeaderboardList participants={participants.filter((p) => { if (p.startingSize && p.startingSize !== null) { return p } })} isOrganizer={isOrganizer} challengeId={id} /></div>
                     </div>
-                    : <><Top3 title={"Top Weight Losers!"} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
+                    : <><Top3 title={"Top Weight Losers!"} participants={participants} /><div className="max-h-full max-w-full rounded-lg"><LeaderboardList /></div></>
                 }
             </div>
         </>

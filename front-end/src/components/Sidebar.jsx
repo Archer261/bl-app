@@ -2,17 +2,34 @@ import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
+import ParticipantModal from './ParticipantModal';
 
-export default function Sidebar({ participants, organizer, isOrganizer, setParticipants }) {
+export default function Sidebar({ challengeId, participants, organizer, isOrganizer, setParticipants }) {
     const [open, setOpen] = useState(false);
-
+    const [openEdit, setOpenEdit] = useState(false);
+    const [participantEdit, setParticipantEdit] = useState({});
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const onClickRemove = (e) => {
-        const updatedData = participants.filter(p => p._id !== e.target.id);
-    }
+        const updatedData = participants.filter((p) => p._id !== e.target.id);
+    };
+
+    const handleOpenEdit = (e) => {
+        const getParticipant = participants.find((p) => p._id === e.target.id);
+        setParticipantEdit(getParticipant);
+        setOpenEdit(true);
+    };
+
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
+        setParticipantEdit({});
+    };
 
     return (
         <>
+            {isOrganizer && openEdit && (
+                <ParticipantModal participant={participantEdit._id} challengeId={challengeId} onClose={handleCloseEdit} />
+            )}
             {!open && (
                 <button
                     type="button"
@@ -24,7 +41,7 @@ export default function Sidebar({ participants, organizer, isOrganizer, setParti
             )}
 
             <Transition.Root show={open} as={Fragment}>
-                <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setOpen}>
+                <Dialog as="div" className="fixed inset-0 overflow-hidden z-0" onClose={() => setOpen(false)}>
                     <Transition.Child
                         as={Fragment}
                         enter="transition-opacity ease-linear duration-300"
@@ -71,7 +88,7 @@ export default function Sidebar({ participants, organizer, isOrganizer, setParti
                                             </div>
                                         </div>
                                         <div className="flex-2 px-4 py-2 overflow-y-auto">
-                                            <h2 className='font-bold text-xl'>Organizer(s):</h2>
+                                            <h2 className="font-bold text-xl">Organizer(s):</h2>
                                             <div className="overflow-x-auto">
                                                 <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
                                                     <thead className="ltr:text-left rtl:text-right">
@@ -103,7 +120,7 @@ export default function Sidebar({ participants, organizer, isOrganizer, setParti
 
                                                             <td className="whitespace-nowrap px-4 py-2">
                                                                 <Link
-                                                                    to={''}
+                                                                    to={`/users/${organizer._id}`}
                                                                     className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
                                                                 >
                                                                     View
@@ -118,63 +135,43 @@ export default function Sidebar({ participants, organizer, isOrganizer, setParti
                                             </div>
                                         </div>
                                         <div className="flex-1 px-4 py-2 overflow-y-auto">
-                                            <h2 className='font-bold text-xl'>Participants:</h2>
+                                            <h2 className="font-bold text-xl">Participants:</h2>
                                             <div className="overflow-x-auto">
                                                 <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
-                                                    <thead className="ltr:text-left rtl:text-right">
-                                                        <tr>
-                                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                                                Name
-                                                            </th>
-                                                            <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-
-                                                            </th>
-
-                                                            <th className="px-4 py-2"></th>
-                                                        </tr>
-                                                    </thead>
-
+                                                    {/* Participants table */}
                                                     <tbody className="divide-y divide-gray-200">
-                                                        {participants ? participants.map((p, i) => (
-
-
+                                                        {participants.map((p) => (
                                                             <tr key={p._id}>
                                                                 <td className="whitespace-nowrap px-4 py-2">
-                                                                    <div
-                                                                        className="inline-block rounded px-4 py-2 text-xs font-medium text-white"
-                                                                    >
-                                                                        <img className="w-8 h-8 rounded-full" src={p.user.profileImage} alt={p.user.username} />
+                                                                    <div className="inline-block rounded px-4 py-2 text-xs font-medium text-white">
+                                                                        <img className="max-w-8 max-h-8 rounded-full" src={p.user.profileImage} alt={p.user.username} />
                                                                     </div>
                                                                 </td>
                                                                 <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                                                     {p.user.firstName} {p.user.lastName}
                                                                 </td>
                                                                 <td className="whitespace-nowrap px-4 py-2 text-gray-700"></td>
-
-
                                                                 <td className="whitespace-nowrap px-4 py-2">
                                                                     <Link
                                                                         to={`/users/${p.user._id}`}
-                                                                        className="inline-block rounded bg-indigo-600 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                                                                        className="inline-block rounded bg-indigo-600 mx-1 px-2 py-2 text-xs font-medium text-white hover:bg-indigo-700"
                                                                     >
                                                                         View
                                                                     </Link>
                                                                     {isOrganizer && (
-                                                                        <button
-                                                                            id={p._id}
-                                                                            className=" mx-2 inline-block  px-4 py-2 text-xs font-medium text-white "
-                                                                            onClick={onClickRemove}
-                                                                        >
-                                                                            <svg width="24px" height="px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12ZM8.25 11.25C7.83579 11.25 7.5 11.5858 7.5 12C7.5 12.4142 7.83579 12.75 8.25 12.75L15.75 12.75C16.1642 12.75 16.5 12.4142 16.5 12C16.5 11.5858 16.1642 11.25 15.75 11.25L8.25 11.25Z" fill="#dc2626" />
-                                                                            </svg>
+                                                                        <>
+                                                                            <button
+                                                                                id={p._id}
+                                                                                className="inline-block rounded bg-red-600 mx-1 px-4 py-2 text-xs font-medium text-white hover:bg-red-700"
 
-                                                                        </button>)
-                                                                    }
+                                                                            >
+                                                                                Remove
+                                                                            </button>
+                                                                        </>
+                                                                    )}
                                                                 </td>
                                                             </tr>
-
-                                                        )) : (<></>)}
+                                                        ))}
                                                     </tbody>
                                                 </table>
                                             </div>
