@@ -90,7 +90,7 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                                     <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
                                         <button
                                             id={player._id}
-                                            className="inline-block rounded bg-blue-600 mx-1 px-4 py-2 text-xs font-medium text-white hover:bg-indigo-700"
+                                            className="inline-block rounded bg-blue-600 mx-1 px-4 py-2 text-xs font-medium text-white hover:bg-blue-700"
                                             onClick={handleOpenEdit}
                                         >
                                             Edit
