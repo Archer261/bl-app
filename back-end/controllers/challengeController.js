@@ -30,7 +30,7 @@ export const getAllChallengeById = async (req, res) => {
                 path: 'participants.user',
                 select: '-password -startingWeight -startingSize'
             }).populate({
-                path: 'weighIns.user',
+                path: 'weighIns.weighIns.user',
                 select: '-password'
             }).populate({
                 path: 'organizer',

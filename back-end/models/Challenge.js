@@ -15,19 +15,19 @@ const participantSchema = new mongoose.Schema({
     },
     startingWeight: {
         type: Number,
-
     },
     startingSize: {
         type: Number,
-
+    },
+    weightPercentChange: {
+        type: Number,
+    },
+    sizePercentChange: {
+        type: Number,
     },
 });
 
 const weighInSchema = new mongoose.Schema({
-    challengeId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Challenge',
-    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -35,22 +35,32 @@ const weighInSchema = new mongoose.Schema({
     },
     beginningWeight: {
         type: Number,
-
     },
     currentWeight: {
         type: Number,
         required: true,
     },
-    weighInDate: {
+    createDate: {
         type: Date,
         default: Date.now,
     },
     beginningSize: {
         type: Number,
-
     },
     currentSize: {
         type: Number,
+    },
+});
+
+const weighInWeekSchema = new mongoose.Schema({
+    challengeId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Challenge',
+    },
+    weighIns: [weighInSchema],
+    weighInDate: {
+        type: Date,
+        default: Date.now,
     },
 });
 
@@ -71,7 +81,7 @@ const challengeSchema = new mongoose.Schema({
     buyIn: {
         type: Number,
     },
-    weighIns: [weighInSchema],
+    weighIns: [weighInWeekSchema],
     isFeatured: {
         type: Boolean,
         default: false,
@@ -102,32 +112,27 @@ challengeSchema.virtual('prizePool').get(function () {
 });
 
 challengeSchema.path('buyIn').set(function (buyIn) {
-    this._previousBuyIn = this.buyIn; // Store the previous value of buyIn
+    this._previousBuyIn = this.buyIn;
     return buyIn;
 });
 
 challengeSchema.path('participants').set(function (participants) {
-    this._previousParticipants = this.participants; // Store the previous value of participants
+    this._previousParticipants = this.participants;
     return participants;
 });
 
 challengeSchema.pre('save', function (next) {
     if (this.isModified('buyIn') || this.isModified('participants')) {
-        // Check if buyIn or participants field has been modified
         if (
             this.isModified('buyIn') &&
             this._previousBuyIn &&
             this._previousParticipants &&
             this._previousParticipants.length !== this.participants.length
         ) {
-            // Check if both buyIn and participants have changed
             this.prizePool = this.buyIn * this.participants.length;
         } else if (this.isModified('buyIn')) {
-            // Only buyIn field has changed
-            this.prizePool +=
-                (this.buyIn - this._previousBuyIn) * this.participants.length;
+            this.prizePool += (this.buyIn - this._previousBuyIn) * this.participants.length;
         } else {
-            // Only participants field has changed
             this.prizePool = this.buyIn * this.participants.length;
         }
     }
@@ -135,7 +140,8 @@ challengeSchema.pre('save', function (next) {
 });
 
 const WeighIn = mongoose.model('WeighIn', weighInSchema);
+const WeighInWeek = mongoose.model('WeighInWeek', weighInWeekSchema);
 const Challenge = mongoose.model('Challenge', challengeSchema);
 const Participant = mongoose.model('Participant', participantSchema);
 
-export { WeighIn, Challenge, Participant };
+export { WeighIn, Challenge, Participant, WeighInWeek };

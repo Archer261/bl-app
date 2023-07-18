@@ -30,7 +30,7 @@ export const getAllUsers = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         console.log(req)
-        const user = await User.findById(req.params.userId);
+        const user = await User.findById(req.params.userId).select('-password');
         console.log(user);
 
         if (!user) {
