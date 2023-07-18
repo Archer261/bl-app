@@ -6,7 +6,7 @@ const Footer = () => {
             <div className="flex flex-wrap justify-center md:justify-between space-y-4 md:space-y-0 md:flex-nowrap md:space-x-6">
             </div>
             <div className="mt-8 text-center">
-                <a href="#" className="text-gray-600 hover:text-gray-800">KJ Archer co.</a>
+                <a href="#" className="text-gray-600 hover:text-gray-800">Powered By <span>KJ Archer co.</span></a>
                 <span className="text-gray-600 mx-2">|</span>
                 <a href="#" className="text-gray-600 hover:text-gray-800">Privacy Policy</a>
                 <span className="text-gray-600 mx-2">|</span>
