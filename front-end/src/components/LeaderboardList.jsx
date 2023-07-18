@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion';
 import ParticipantModal from './ParticipantModal';
-const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) => {
+const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose, size, weight }) => {
 
     // const leaderboardData = [
     //     { rank: 1, name: 'John', score: 100 },
@@ -24,6 +24,13 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
         setOpenEdit(false);
         setParticipantEdit({});
     };
+
+    const decimalToPercentage = (decimalValue) => {
+
+        const percentageValue = (decimalValue * 100).toFixed(2);
+        return `${percentageValue}%`;
+    };
+
 
     if (!participants) {
         return (
@@ -58,11 +65,12 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                         transition={{ duration: 0.5 }}
                         className="py-3 flex items-center w-full px-3"
                     >
-                        <span className="text-gray-500">Place</span>
+                        <span className="text-gray-500 mr-5">Place</span>
+                        <span className="text-gray-500 mr-10"></span>
                         <span className="ml-3 font-medium">Name</span>
-                        <span className="ml-40 mr-2 text-gray-500">% Change</span>
+                        <span className="ml-60 mr-2 text-gray-500">% Change</span>
                     </motion.li>
-                    {participants.map((player) => (
+                    {participants.map((player, i) => (
                         <motion.li
                             key={player.rank}
                             initial={{ opacity: 0, y: 20 }}
@@ -72,6 +80,9 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                             whileTap={{ scale: 0.95 }}
                             className="py-3 sm:py-4">
                             <div className="flex items-center space-x-4">
+                                <div className="flex-shrink-0">
+                                    {i + 1}
+                                </div>
                                 <div className="flex-shrink-0">
                                     <img className="w-8 h-8 rounded-full" src={player.user.profileImage} alt={player.user.username} />
                                 </div>
@@ -83,7 +94,10 @@ const LeaderboardList = ({ participants, challengeId, isOrganizer, onClose }) =>
                                         {player.user.email}
                                     </p>
                                 </div>
-                                <div className=" min-w-15 inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
+                                <div className="flex-2 min-w-15 inline-flex items-center text-base font-semibold text-gray-900 dark:text-black">
+                                    <p className="text-sm text-gray-500 truncate dark:text-gray-800">
+                                        {!size ? `${player.weightPercentChange}%` : `${player.sizePercentChange}%`}
+                                    </p>
 
                                 </div>
                                 {isOrganizer && (

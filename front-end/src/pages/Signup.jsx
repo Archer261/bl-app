@@ -55,7 +55,6 @@ const SignupPage = () => {
                 // Handle successful signup
                 signup(response);
                 // if(response.data)
-                console.log("Response test: " + response.data);
             })
             .catch((error) => {
                 // Handle signup error
@@ -65,7 +64,7 @@ const SignupPage = () => {
 
     const handleSignupClick = () => {
         // Perform additional actions before sign-up
-        console.log('Signup button clicked');
+
     };
     return (
         <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

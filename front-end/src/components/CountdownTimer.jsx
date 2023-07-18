@@ -51,17 +51,36 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
     }
 
     return (
-        <div className="flex-1 justify-center items-center">
-            <div className="text-center">
-                {remainingTime > 0 ? (
-                    <>
-                        <p className="text-3xl font-semibold">{countdownText}</p>
-                        <p className="text-lg">{formatTime(remainingTime)}</p>
-                        {currentWeek > 0 && <p className="text-lg">Week: {currentWeek}</p>}
-                    </>
-                ) : (
-                    <p className="text-3xl font-semibold">{countdownText}</p>
-                )}
+        // <div className="flex-1 justify-center items-center">
+        //     <div className="text-center">
+        //         {remainingTime > 0 ? (
+        //             <>
+        //                 <p className="text-3xl font-semibold">{countdownText}</p>
+        //                 <p className="text-lg">{formatTime(remainingTime)}</p>
+        //                 {currentWeek > 0 && <p className="text-lg">Week: {currentWeek}</p>}
+        //             </>
+        //         ) : (
+        //             <p className="text-3xl font-semibold">{countdownText}</p>
+        //         )}
+        //     </div>
+        // </div>
+        <div
+            className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
+        >
+            <div className="p-4 flex items-center">
+                <div
+                    className="p-3 rounded-full text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500 mr-4"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-calendar" viewBox="0 0 16 16"> <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" /> </svg>
+                </div>
+                <div>
+                    <p className="mb-2 text-sm font-medium text-white dark:text-white">
+                        Weigh In Week
+                    </p>
+                    <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+                        {currentWeek}
+                    </p>
+                </div>
             </div>
         </div>
     );

@@ -41,14 +41,14 @@ const CreateUser = () => {
             });
     };
     return (
-        <section class="bg-white dark:bg-white rounded-lg h-full">
-            <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-                <h2 class="mb-4 text-xl font-bold text-gray-900 dark:gray-900">Create New User</h2>
+        <section className="bg-white dark:bg-white rounded-lg h-full">
+            <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+                <h2 className="mb-4 text-xl font-bold text-gray-900 dark:gray-900">Create New User</h2>
                 <form onSubmit={handleSubmit}>
-                    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         {user.isAdmin &&
                             <>
-                                <div class="flex items-center">
+                                <div className="flex items-center">
                                     <label className="relative inline-flex items-center cursor-pointer">
                                         <input
                                             type="checkbox"
@@ -63,7 +63,7 @@ const CreateUser = () => {
                                         </span>
                                     </label>
                                 </div>
-                                <div class="flex items-center">
+                                <div className="flex items-center">
                                     <label className="relative inline-flex items-center cursor-pointer">
                                         <input
                                             type="checkbox"
@@ -80,32 +80,32 @@ const CreateUser = () => {
                                 </div>
                             </>
                         }
-                        <div class="sm:col-span-2">
-                            <label for="firstName" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">First Name</label>
-                            <input onChange={(e) => setFirstName(e.target.value)} type="text" name="firstName" id="firstName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bob" required="" />
+                        <div className="sm:col-span-2">
+                            <label for="firstName" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">First Name</label>
+                            <input onChange={(e) => setFirstName(e.target.value)} type="text" name="firstName" id="firstName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Bob" required="" />
                         </div>
-                        <div class="sm:col-span-2">
-                            <label for="lastName" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Last Name</label>
-                            <input onChange={(e) => setLastName(e.target.value)} type="text" name="lastName" id="lastName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Smith" required="" />
+                        <div className="sm:col-span-2">
+                            <label for="lastName" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Last Name</label>
+                            <input onChange={(e) => setLastName(e.target.value)} type="text" name="lastName" id="lastName" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Smith" required="" />
                         </div>
-                        <div class="sm:col-span-2">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Username</label>
-                            <input onChange={(e) => setUsername(e.target.value)} type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type username" required="" />
+                        <div className="sm:col-span-2">
+                            <label for="name" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Username</label>
+                            <input onChange={(e) => setUsername(e.target.value)} type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type username" required="" />
                         </div>
-                        <div class="w-full">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Email</label>
-                            <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="example@example.com" required="" />
+                        <div className="w-full">
+                            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Email</label>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="example@example.com" required="" />
                         </div>
-                        <div class="w-full">
-                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Password</label>
-                            <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="" />
+                        <div className="w-full">
+                            <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Password</label>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="" />
                         </div>
-                        <div class="sm:col-span-2">
-                            <label for="profileImage" class="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Profile Image</label>
-                            <input onChange={(e) => setProfileImage(e.target.value)} type="text" name="profileImage" id="profileImage" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="" />
+                        <div className="sm:col-span-2">
+                            <label for="profileImage" className="block mb-2 text-sm font-medium text-gray-900 dark:gray-900">Profile Image</label>
+                            <input onChange={(e) => setProfileImage(e.target.value)} type="text" name="profileImage" id="profileImage" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:gray-900 dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="" required="" />
                         </div>
                     </div>
-                    <button type="submit" class=" bg-red-600 text-white inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center gray-900 bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-red-700">
+                    <button type="submit" className=" bg-red-600 text-white inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center gray-900 bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-red-700">
                         Create User
                     </button>
                 </form>

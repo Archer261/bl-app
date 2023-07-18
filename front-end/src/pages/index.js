@@ -5,6 +5,6 @@ import Signup from './Signup';
 import CreateChallenge from './CreateChallenge';
 import Challenge from './Challenge';
 import Challenges from './Challenges';
-import CreateUser from './CreateUser'
+import CreateUser from './CreateUser';
 
 export { Login, Profile, Home, Signup, CreateChallenge, Challenge, Challenges, CreateUser }

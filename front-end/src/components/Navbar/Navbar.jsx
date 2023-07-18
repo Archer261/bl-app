@@ -13,7 +13,6 @@ const Navbar = () => {
         logout(); // Call the logout function when the logout button is clicked
     };
 
-    const unreadNotificationCount = 3; // Example count
     return (
         <nav className="mt-1 mb-4 px-4 rounded-lg backdrop-filter backdrop-blur-lg w-4/5">
             <div className="container mx-auto flex items-center justify-between">

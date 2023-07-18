@@ -14,5 +14,9 @@ import FmImage from './ImageComponent';
 import Sidebar from './Sidebar';
 import ErrorPopup from './ErrorPopup';
 import ParticipantModal from './ParticipantModal';
+import WeighInForm from './WeighInForm';
+import ResultsModal from './ResultsModal'
+import WeighInInput from './WeignInInput'
+import PlaceMedal from './PlaceMedal';
 
-export { ParticipantModal, ErrorPopup, Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage, Sidebar }
+export { ParticipantModal, PlaceMedal, WeighInInput, ErrorPopup, Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage, Sidebar, WeighInForm, ResultsModal }
