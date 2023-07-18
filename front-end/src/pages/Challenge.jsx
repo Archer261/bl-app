@@ -81,7 +81,7 @@ const Challenge = () => {
                         </div> */}
                         <div className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 justify-center items-center">
                             <div
-                                className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
+                                className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-red-600 dark:bg-gray-800"
                             >
                                 <div className="p-4 flex items-center">
                                     <div
@@ -104,7 +104,7 @@ const Challenge = () => {
                                 </div>
                             </div>
                             <div
-                                className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
+                                className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-red-600 dark:bg-gray-800"
                             >
                                 <div className="p-4 flex items-center">
                                     <div
