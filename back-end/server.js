@@ -1,11 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-// import cookieParser from 'cookie-parser';
-// import cors from 'cors';
-
-// import path from 'path';
-
 import authRoutes from './routes/authRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import notificationRoutes from './routes/notificationRoutes.js';
@@ -40,14 +35,6 @@ app.get("/", (req, res) => {
     res.send('you hit the endpoint');
 })
 
-// Middlewares
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//     exposedHeaders: ['Content-Length', 'X-Foo', 'X-Bar'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-// app.use(cookieParser());
 app.use(express.json());
 
 // Routes
