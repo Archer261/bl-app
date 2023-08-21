@@ -19,8 +19,6 @@ const Challenge = () => {
     const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
     const [modalResultsOpen, setModalResultsOpen] = useState(false);
 
-    const winners = [{ name: 'Player A', percent: -6 }, { name: 'Player B', percent: -4 }, { name: 'Player C', percent: -1 }];
-
     const handleResultsOpenModal = () => {
         setModalResultsOpen(true);
     };

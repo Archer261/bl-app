@@ -135,7 +135,8 @@ const WinnersPodiumModal = ({ isOpen, winnersOne, winnersTwo, onClose }) => {
                             width={window.innerWidth}
                             height={window.innerHeight}
                             recycle={false}
-                            numberOfPieces={200}
+                            numberOfPieces={2000}
+                            tweenDuration={20000}
                             run={true}
                         />
                     )}
