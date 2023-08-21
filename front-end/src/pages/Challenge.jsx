@@ -79,7 +79,6 @@ const Challenge = () => {
 
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
-    console.log(challengeData)
     return (
         <>
             <Sidebar
