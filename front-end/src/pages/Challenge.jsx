@@ -17,7 +17,7 @@ const Challenge = () => {
     const [isOrganizer, setIsOrganizer] = useState(false);
     const [isFormOpen, setIsFormOpen] = useState(false); // State to track whether the form is open
     const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
-    const [modalResultsOpen, setModalResultsOpen] = useState(true);
+    const [modalResultsOpen, setModalResultsOpen] = useState(false);
 
     const winners = [{ name: 'Player A', percent: -6 }, { name: 'Player B', percent: -4 }, { name: 'Player C', percent: -1 }];
 
