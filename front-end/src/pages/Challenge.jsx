@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import { AuthContext } from '../utils/AuthContext';
-import { WeighInForm, LeaderboardList, Top3, Sidebar, ResultsModal } from '../components';
+import { WeighInForm, LeaderboardList, Top3, Sidebar, ResultsModal, ChallengeModal, WinnersPodiumModal } from '../components';
 import CountdownTimer from '../components/CountdownTimer';
 import PotCount from '../components/PotCount';
 import CountUp from 'react-countup';
@@ -16,6 +16,18 @@ const Challenge = () => {
     const [error, setError] = useState(null);
     const [isOrganizer, setIsOrganizer] = useState(false);
     const [isFormOpen, setIsFormOpen] = useState(false); // State to track whether the form is open
+    const [isChallengeModalOpen, setIsChallengeModalOpen] = useState(false);
+    const [modalResultsOpen, setModalResultsOpen] = useState(true);
+
+    const winners = [{ name: 'Player A', percent: -6 }, { name: 'Player B', percent: -4 }, { name: 'Player C', percent: -1 }];
+
+    const handleResultsOpenModal = () => {
+        setModalResultsOpen(true);
+    };
+
+    const handleResultsCloseModal = () => {
+        setModalResultsOpen(false);
+    };
 
     useEffect(() => {
         const fetchChallengeData = async () => {
@@ -52,6 +64,11 @@ const Challenge = () => {
         setIsFormOpen(false);
     };
 
+    const handleSaveChanges = (updatedChallenge) => {
+        console.log(updatedChallenge);
+        // Make API call to update the challenge on the backend, if needed.
+    };
+
     if (loading) {
         return <span className="loading loading-spinner text-error"></span>;
     }
@@ -62,6 +79,7 @@ const Challenge = () => {
 
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
+    console.log(challengeData)
     return (
         <>
             <Sidebar
@@ -74,12 +92,7 @@ const Challenge = () => {
             <div>
                 {challengeData.prizePool > 0 && (
                     <>
-                        {/* <div className="w-96 flex justify-self-center px-4 lg:ml-80 min-h-40">
-                            <CountdownTimer startDateTime={sd} endDateTime={ed} />
-                            <div className="divider divider-horizontal"></div>
-                            <PotCount prize={challengeData.prizePool} />
-                        </div> */}
-                        <div className="grid gap-4 mb-8 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 justify-center items-center">
+                        <div className="grid gap-4 mb-8 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 justify-center items-center max-w-full">
                             <div
                                 className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
                             >
@@ -129,35 +142,11 @@ const Challenge = () => {
                                 </div>
                             </div>
                             <CountdownTimer startDateTime={sd} endDateTime={ed} />
-                            {/* <div
-                                className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
-                            >
-                                <div className="p-4 flex items-center">
-                                    <div
-                                        className="p-3 rounded-full text-teal-500 dark:text-teal-100 bg-teal-100 dark:bg-teal-500 mr-4"
-                                    >
-                                        <svg fill="currentColor" viewBox="0 0 20 20" className="w-5 h-5">
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                                                clip-rule="evenodd"
-                                            ></path>
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p className="mb-2 text-sm font-medium text-white dark:text-white">
-                                            Pending contacts
-                                        </p>
-                                        <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">35</p>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
-
                     </>
                 )}
                 {JSON.parse(challengeData.withSize) ? (
-                    <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-8">
+                    <div className="grid grid-cols- gap-4 lg:grid-cols-2 lg:gap-8">
                         <div className="max-h-full rounded-lg">
                             <Top3
                                 title="Top Weight Losers"
@@ -210,7 +199,7 @@ const Challenge = () => {
                         <label tabIndex={0} className="btn m-1">Tools</label>
                         <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                             <li onClick={openForm}><a>New Weigh-In</a></li>
-                            <li><a>Edit Challenge</a></li>
+                            <li><a onClick={() => setIsChallengeModalOpen(true)}>Edit Challenge</a></li>
                             <li><a>Edit Participants</a></li>
                         </ul>
                     </div>
@@ -223,7 +212,27 @@ const Challenge = () => {
 
                         </div>
                     )}
+
+                    <ChallengeModal isOpen={isChallengeModalOpen} onClose={() => setIsChallengeModalOpen(false)} onSave={handleSaveChanges} />
+
                 </>
+            }
+            {(challengeData.weighIns.length === challengeData.count) && (
+                !modalResultsOpen && (
+                    <div class="fixed bottom-4 left-11 flex items-center justify-center">
+                        <button
+                            onClick={handleResultsOpenModal}
+                            className="animate-bounce bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors"
+                        >
+                            Final Results
+                        </button>
+                    </div>
+                )
+            )
+            }
+            {modalResultsOpen && (
+                <WinnersPodiumModal isOpen={modalResultsOpen} winnersOne={participants.filter((p) => p.startingWeight && p.startingWeight !== null).sort((a, b) => a.weightPercentChange - b.weightPercentChange)} onClose={handleResultsCloseModal} winnersTwo={participants.filter((p) => p.startingSize && p.startingSize !== null).sort((a, b) => a.sizePercentChange - b.sizePercentChange)} />
+            )
             }
             {/* <ResultsModal data={participants} /> */}
             {/* {challengeData.weighIns.map((r, i) => (
@@ -236,6 +245,7 @@ const Challenge = () => {
                 </button>
             )
             )} */}
+
         </>
     );
 };

@@ -17,7 +17,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
                 setCurrentWeek(0);
                 setIsLoading(false); // Set isLoading to false when the necessary fields are populated
             } else if (currentTime > endDateTime) {
-                setCountdownText('Challenge ended');
+                setCountdownText('Challenge Complete!');
                 setCurrentWeek(0);
                 setIsLoading(false); // Set isLoading to false when the necessary fields are populated
             } else {
@@ -78,7 +78,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
                         Weigh In Week
                     </p>
                     <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        {currentWeek}
+                        {countdownText}
                     </p>
                 </div>
             </div>

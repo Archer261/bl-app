@@ -18,5 +18,7 @@ import WeighInForm from './WeighInForm';
 import ResultsModal from './ResultsModal'
 import WeighInInput from './WeignInInput'
 import PlaceMedal from './PlaceMedal';
+import ChallengeModal from './ChallengeModal';
+import WinnersPodiumModal from './WinnersPodiumModal';
 
-export { ParticipantModal, PlaceMedal, WeighInInput, ErrorPopup, Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage, Sidebar, WeighInForm, ResultsModal }
+export { ChallengeModal, ParticipantModal, PlaceMedal, WeighInInput, ErrorPopup, Header, Navbar, Info, Footer, Topics, FileImport, DatePickerModal, NotificationBell, Hero, Popup, LeaderboardList, Top3, FmImage, Sidebar, WeighInForm, ResultsModal, WinnersPodiumModal }
