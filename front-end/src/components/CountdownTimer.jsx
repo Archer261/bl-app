@@ -65,7 +65,7 @@ const CountdownTimer = ({ startDateTime, endDateTime }) => {
         //     </div>
         // </div>
         <div
-            className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
+            className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-red-600 dark:bg-gray-800"
         >
             <div className="p-4 flex items-center">
                 <div
