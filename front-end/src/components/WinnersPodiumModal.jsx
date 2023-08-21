@@ -37,9 +37,9 @@ const WinnersPodiumModal = ({ isOpen, winnersOne, winnersTwo, onClose }) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 flex items-center justify-center bg-opacity-50 bg-gray-900"
+                        className="fixed inset-0 flex flex-col md:flex-row items-center justify-center bg-opacity-50 bg-gray-900"
                     >
-                        <div className="bg-red-600 w-1/3 h-auto p-8 rounded-lg shadow-lg mx-5">
+                        <div className="bg-red-600 w-2/3 md:w-1/3 h-auto p-8 rounded-lg shadow-lg mx-5">
                             <h2 className="text-white text-2xl font-bold mb-4 text-center">Results</h2>
                             <h3 className="text-white text-lg font-bold mb-4 text-center">Weight Challenge</h3>
                             <div className="flex justify-center pt-10 space-x-4">
@@ -80,9 +80,9 @@ const WinnersPodiumModal = ({ isOpen, winnersOne, winnersTwo, onClose }) => {
                                 </button>
                             </div> */}
                         </div>
-                        <div className="bg-red-600 w-1/3 h-auto p-8 rounded-lg shadow-lg mx-5">
+                        <div className="bg-red-600 w-2/3 md:w-1/3 h-auto p-8 rounded-lg shadow-lg my-2 md:mx-5">
                             <h2 className="text-white text-2xl font-bold mb-4 text-center">Results</h2>
-                            <h3 className="text-white text-lg font-bold mb-4 text-center">Weight Challenge</h3>
+                            <h3 className="text-white text-lg font-bold mb-4 text-center">Size Challenge</h3>
                             <div className="flex justify-center pt-10 space-x-4">
                                 {top3RecordsTwo.map((winner, index) => (
                                     <motion.div
@@ -121,7 +121,7 @@ const WinnersPodiumModal = ({ isOpen, winnersOne, winnersTwo, onClose }) => {
                                 </button>
                             </div> */}
                         </div>
-                        <div className="relative right-20 bottom-60 justify-center">
+                        <div className="relative right-0 md:right-20 md:bottom-60 justify-center">
                             <button
                                 onClick={onClose}
                                 className="bg-white text-red-600 hover:text-white px-4 py-2 rounded mt-8 hover:bg-red-600 transition-colors"

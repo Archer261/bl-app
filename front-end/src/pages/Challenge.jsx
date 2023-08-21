@@ -37,12 +37,20 @@ const Challenge = () => {
                 setParticipants(response.data.participants);
 
                 checkOrganizer(response.data.organizer._id);
+                checkFinished(response.data);
                 setLoading(false);
             } catch (error) {
                 setError(error);
                 setLoading(false);
             }
+            checkFinished();
         };
+
+        const checkFinished = (array) => {
+            if (array.weighIns.length === 5) {
+                setModalResultsOpen(true);
+            }
+        }
 
         const checkOrganizer = (organizerId) => {
             if (organizerId === user.id) {
@@ -79,6 +87,7 @@ const Challenge = () => {
 
     const sd = new Date(challengeData.startDate).getTime();
     const ed = new Date(challengeData.endDate).getTime();
+
     return (
         <>
             <Sidebar
