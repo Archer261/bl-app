@@ -47,7 +47,7 @@ const Challenge = () => {
         };
 
         const checkFinished = (array) => {
-            if (array.weighIns.length === 5) {
+            if (array.weighIns.length === array.count) {
                 setModalResultsOpen(true);
             }
         }
